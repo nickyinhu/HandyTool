@@ -111,6 +111,8 @@
                name = "password" placeholder = "password" required>
             <button class = "btn btn-lg btn-primary btn-block" type = "submit" 
                name = "login">Login</button>
+            <input type="radio" name = "accountType" value = "Clerk"> Clerk
+  	    <input type="radio" name = "accountType" value = "Customer"> Customer<br>
          </form>
 			
          Click here to <a href = "logout.php" tite = "Logout">Logout.
