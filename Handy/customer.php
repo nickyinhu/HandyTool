@@ -9,13 +9,11 @@
       <?php
          session_start();
          $login_user = $_SESSION['login_user'];
-         $conn = $_SESSION['conn'];
+         include('dbconn.php');
+         global $conn;
          echo $login_user;
          if (!$login_user) {
             die("You are not login yet!");
-         }
-         if (!$conn) {
-            die("Lost DB connection!");
          }
          $sql = "SELECT email, first_name, last_name from customer where email = '$login_user'";
          $result = $conn->query($sql) or die('Error querying database.');;
