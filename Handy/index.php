@@ -1,13 +1,3 @@
-<?php
-   ob_start();
-   session_start();
-?>
-
-<?
-   // error_reporting(E_ALL);
-   // ini_set("display_errors", 1);
-?>
-
 <html lang = "en">
 
    <head>
@@ -17,6 +7,7 @@
    <body>
       <h2>Enter User ID and Password</h2> 
       <?php
+         session_start();
          include('dbconn.php');
          global $conn;
          $msg = '';
@@ -33,6 +24,7 @@
             }
             $result = $conn->query($sql) or die('Error querying database.');;
             if ($result->num_rows > 0 ) {
+                  $_SESSION['login_user']= $username;
                if ($database == 'clerk' ) {
                   echo "<script> window.location.assign('clerk.php'); </script>";
                } else {
