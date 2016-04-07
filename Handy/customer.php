@@ -8,13 +8,12 @@
       <h2>Clerk</h2> 
       <?php
          session_start();
-         $login_user = $_SESSION['login_user'];
          include('dbconn.php');
          global $conn;
-         echo $login_user;
-         if (!$login_user) {
+         if (!empty($_SESSION['login_user'])) {
             die("You are not login yet!");
          }
+         $login_user = $_SESSION['login_user'];
          $sql = "SELECT email, first_name, last_name from customer where email = '$login_user'";
          $result = $conn->query($sql) or die('Error querying database.');;
          if ($result->num_rows > 0 ) {

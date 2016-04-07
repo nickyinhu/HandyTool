@@ -8,12 +8,12 @@
       <h2>Clerk</h2> 
       <?php
          session_start();
+         if (!empty($_SESSION['login_user'])) {
+            die("You are not login yet!");
+         }
          include('dbconn.php');
          global $conn;
          $login_user = $_SESSION['login_user'];
-         if (!$login_user) {
-            die("You are not login yet!");
-         }
          $sql = "SELECT clerk_id, first_name, last_name from clerk where clerk_id = '$login_user'";
          $result = $conn->query($sql) or die('Error querying database.');;
          if ($result->num_rows > 0 ) {
