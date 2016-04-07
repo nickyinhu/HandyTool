@@ -133,7 +133,7 @@
                value="clerk">Clerk
                <input type="radio" name="accounttype"
                <?php if (isset($accounttype) && $accounttype=="customer") echo "checked";?>
-               value="customer">Customer
+               value="customer" CHECKED >Customer
          </form>
 			
          <!-- Click here to <a href = "logout.php" tite = "Logout">Logout. -->
