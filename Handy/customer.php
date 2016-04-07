@@ -22,5 +22,23 @@
             }
          }
       ?>
+
+      
+      <div class = "container">
+         <div>
+            <button type="submit" value="Submit">View Profile</button>
+         </div>
+         <div>
+            <button type="submit" value="Submit">Check Tool Availability</button>
+         </div>
+         <div>
+            <button type="submit" value="Submit">Make Reservation</button>
+         </div>
+         <div>
+            <button type="submit" value="Submit">Exit</button>
+         </div>
+         
+
+      </div>
    </body>
 </html>

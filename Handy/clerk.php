@@ -22,5 +22,33 @@
             }
          }
       ?>
+
+
+      <div class = "container">
+         <div>
+            <button type="submit" value="Submit">Pick-up Reservation</button>
+         </div>
+         <div>
+            <button type="submit" value="Submit">Drop-Off Reservation</button>
+         </div>
+         <div>
+            <button type="submit" value="Submit">Service Order</button>
+         </div>
+         <div>
+            <button type="submit" value="Submit">Add New Tool</button>
+         </div>
+         <div class = "container">
+         <div>
+            <button type="submit" value="Submit">Sell Tool</button>
+         </div>
+         <div>
+            <button type="submit" value="Submit">Generate Report</button>
+         </div>
+         <div>
+            <button type="submit" value="Submit">Exit</button>
+         </div>
+      
+
+      </div>
    </body>
 </html>
