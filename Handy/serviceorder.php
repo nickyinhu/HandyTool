@@ -16,6 +16,25 @@
          if (!$login_user) {
             die("You are not login yet!");
          }
+
+         if ( ! empty( $_POST ) ) {
+              // Insert our data
+            $sql = "INSERT INTO service_request( tool_id, start_date, end_date, cost, clerk_id ) 
+                VALUES ( '{$mysqli->real_escape_string($_POST['toolid'])}', '{$mysqli->real_escape_string($_POST['startdate'])}',
+                '{$mysqli->real_escape_string($_POST['enddate'])}', '{$mysqli->real_escape_string($_POST['cost'])}')";
+            
+            $insert = $mysqli->query($sql);
+  
+            // Print response from MySQL
+            if ( $insert ) {
+               echo "Success! Row ID: {$mysqli->insert_id}";
+            } else {
+               die("Error: {$mysqli->errno} : {$mysqli->error}");
+            }
+  
+            // Close our connection
+            $mysqli->close();
+            }
       ?>
 
       <form>
