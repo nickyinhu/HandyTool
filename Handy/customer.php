@@ -26,16 +26,16 @@
       
       <div class = "container">
          <div>
-            <button type="submit" value="Submit">View Profile</button>
+            <button type="submit" onClick="location.href='viewprofile.html'">View Profile</button>
          </div>
          <div>
-            <button type="submit" value="Submit">Check Tool Availability</button>
+            <button type="submit" onClick="location.href='toolavailability.html'">Check Tool Availability</button>
          </div>
          <div>
-            <button type="submit" value="Submit">Make Reservation</button>
+            <button type="submit" onClick="location.href='makereservation.html'">Make Reservation</button>
          </div>
          <div>
-            <button type="submit" value="Submit">Exit</button>
+            <button type="submit" onClick="location.href='index.html'">Exit</button>
          </div>
          
 

@@ -26,26 +26,26 @@
 
       <div class = "container">
          <div>
-            <button type="submit" value="Submit">Pick-up Reservation</button>
+            <button type="submit" onClick="location.href='pickup.html'">Pick-up Reservation</button>
          </div>
          <div>
-            <button type="submit" value="Submit">Drop-Off Reservation</button>
+            <button type="submit" onClick="location.href='dropoff.html'">Drop-Off Reservation</button>
          </div>
          <div>
-            <button type="submit" value="Submit">Service Order</button>
+            <button type="submit" onClick="location.href='serviceorder.html'">Service Order</button>
          </div>
          <div>
-            <button type="submit" value="Submit">Add New Tool</button>
+            <button type="submit" onClick="location.href='addnewtool.html'">Add New Tool</button>
          </div>
          <div class = "container">
          <div>
-            <button type="submit" value="Submit">Sell Tool</button>
+            <button type="submit" onClick="location.href='selltool.html'">Sell Tool</button>
          </div>
          <div>
-            <button type="submit" value="Submit">Generate Report</button>
+            <button type="submit" onClick="location.href='report.html'">Generate Report</button>
          </div>
          <div>
-            <button type="submit" value="Submit">Exit</button>
+            <button type="submit" onClick="location.href='index.html'">Exit</button>
          </div>
       
 
