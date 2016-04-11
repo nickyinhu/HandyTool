@@ -5,12 +5,12 @@
    </head>
 
    <body>
-      <h2>Clerk</h2> 
+      <h2>Customer</h2>
       <?php
          session_start();
          include('dbconn.php');
          global $conn;
-         if (!empty($_SESSION['login_user'])) {
+         if (empty($_SESSION['login_user'])) {
             die("You are not login yet!");
          }
          $login_user = $_SESSION['login_user'];
