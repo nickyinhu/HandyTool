@@ -8,7 +8,7 @@
       <h2>Clerk</h2> 
       <?php
          session_start();
-         if (!empty($_SESSION['login_user'])) {
+         if (empty($_SESSION['login_user'])) {
             die("You are not login yet!");
          }
          include('dbconn.php');
@@ -26,26 +26,26 @@
 
       <div class = "container">
          <div>
-            <button type="submit" onClick="location.href='pickup.html'">Pick-up Reservation</button>
+            <button type="submit" onClick="location.href='pickup.php'">Pick-up Reservation</button>
          </div>
          <div>
-            <button type="submit" onClick="location.href='dropoff.html'">Drop-Off Reservation</button>
+            <button type="submit" onClick="location.href='dropoff.php'">Drop-Off Reservation</button>
          </div>
          <div>
-            <button type="submit" onClick="location.href='serviceorder.html'">Service Order</button>
+            <button type="submit" onClick="location.href='serviceorder.php'">Service Order</button>
          </div>
          <div>
-            <button type="submit" onClick="location.href='addnewtool.html'">Add New Tool</button>
+            <button type="submit" onClick="location.href='addnewtool.php'">Add New Tool</button>
          </div>
          <div class = "container">
          <div>
-            <button type="submit" onClick="location.href='selltool.html'">Sell Tool</button>
+            <button type="submit" onClick="location.href='selltool.php'">Sell Tool</button>
          </div>
          <div>
-            <button type="submit" onClick="location.href='report.html'">Generate Report</button>
+            <button type="submit" onClick="location.href='report.php'">Generate Report</button>
          </div>
          <div>
-            <button type="submit" onClick="location.href='index.html'">Exit</button>
+            <button type="submit" onClick="location.href='index.php'">Exit</button>
          </div>
       
 
