@@ -26,16 +26,16 @@
       
       <div class = "container">
          <div>
-            <button type="submit" onClick="location.href='viewprofile.html'">View Profile</button>
+            <button type="submit" onClick="location.href='viewprofile.php'">View Profile</button>
          </div>
          <div>
-            <button type="submit" onClick="location.href='toolavailability.html'">Check Tool Availability</button>
+            <button type="submit" onClick="location.href='checkavailability.php'">Check Tool Availability</button>
          </div>
          <div>
-            <button type="submit" onClick="location.href='makereservation.html'">Make Reservation</button>
+            <button type="submit" onClick="location.href='makereservation.php'">Make Reservation</button>
          </div>
          <div>
-            <button type="submit" onClick="location.href='index.html'">Exit</button>
+            <button type="submit" onClick="location.href='index.php'">Exit</button>
          </div>
          
 
