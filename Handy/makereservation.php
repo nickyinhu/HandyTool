@@ -22,6 +22,12 @@
                     echo "<script> window.location.assign('summary.php'); </script>";                    
                 }
             }
+            if (isset($_POST['reset'])) {
+                unset($_SESSION['tool_list']);
+                unset($_SESSION['startdate']);
+                unset($_SESSION['enddate']);
+                echo "<script> window.location.assign('makereservation.php'); </script>";
+            }
             if (isset($_POST['logout'])) {
                 session_destroy();
                 echo "<script> window.location.assign('index.php'); </script>";
@@ -64,6 +70,9 @@
                 <button class = "btn btn-lg btn-primary btn-block" type = "button" id = "remove" name = "remove">Remove Last Tool</button>
                 </p>
                 <button class = "btn btn-lg btn-primary btn-block" type = "submit" name = "calculate">Calculate Total</button>
+                <p>
+                </p>
+                <button class = "btn btn-lg btn-primary btn-block" type = "submit" name = "reset">Reset</button>
                 <p>
                 <hr>
                 <button class = "btn btn-lg btn-primary btn-block" type = "submit" name = "logout">Log Out</button>

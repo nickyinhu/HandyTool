@@ -18,32 +18,33 @@
                 die("You are not login yet!");
                 header("refresh:3;url=index.php");
             }
-            if (!isset($_SESSION['tool_list']) && empty($_)) {
-                die('&nbsp&nbsp<span style="color:#FF0000;text-align:center;">Please add at least one tool to your list!</span>');
-            }
-            $email = $_SESSION['login_user'];
-            $start = $_SESSION['startdate'];
-            $end = $_SESSION['enddate'];
-            $tool_list = $_SESSION['tool_list'];
-            $total_rental = $_SESSION['rental'];
-            $total_deposit = $_SESSION['deposit'];
+            if (!isset($_SESSION['tool_list']) || empty($_SESSION['tool_list'])) {
+                $email = $_SESSION['login_user'];
+                $start = $_SESSION['startdate'];
+                $end = $_SESSION['enddate'];
+                $tool_list = $_SESSION['tool_list'];
+                $total_rental = $_SESSION['rental'];
+                $total_deposit = $_SESSION['deposit'];
 
-            $id_list = join(',',array_keys($tool_list));
-            $resv_sql = "
-                INSERT INTO reservation (start_date, end_date, total_price, total_deposit, customer_email)
-                VALUES ('$start', '$end', '$total_rental', '$total_deposit', '$email')";
-            $last_id = 0;
-            if ($conn->query($resv_sql) === TRUE) {
-                $last_id = $conn->insert_id;
-            } else {
-                die("Error: " . $resv_sql . "<br>" . $conn->error);
+                $id_list = join(',',array_keys($tool_list));
+                $resv_sql = "
+                    INSERT INTO reservation (start_date, end_date, total_price, total_deposit, customer_email)
+                    VALUES ('$start', '$end', '$total_rental', '$total_deposit', '$email')";
+                $last_id = 0;
+                if ($conn->query($resv_sql) === TRUE) {
+                    $last_id = $conn->insert_id;
+                } else {
+                    die("Error: " . $resv_sql . "<br>" . $conn->error);
+                }
+                $stmt = $conn->prepare("INSERT INTO reservation_contains (resv_number, tool_id) VALUES ('$last_id',?)");
+                ksort($tool_list);
+                foreach (array_keys($tool_list) as $id) {
+                    $stmt->bind_param("i", $id);
+                    $stmt->execute();
+                }
             }
-            $stmt = $conn->prepare("INSERT INTO reservation_contains (resv_number, tool_id) VALUES ('$last_id',?)");
-            ksort($tool_list);
-            foreach (array_keys($tool_list) as $id) {
-                $stmt->bind_param("i", $id);
-                $stmt->execute();
-            }
+            unset($resv_sql);
+            unset($tool_list);
             unset($_SESSION['tool_list']);
             unset($_SESSION['startdate']);
             unset($_SESSION['enddate']);
