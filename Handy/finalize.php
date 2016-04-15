@@ -64,7 +64,7 @@
                 <?php } ?>
                 <br>
                 <p>
-                <button class = "btn btn-lg btn-primary btn-block" type = "submit" name = "back">Back to Main Menu</button>
+                <button class = "btn btn-lg btn-primary btn-block" type = "submit" name = "back">Main Menu</button>
                 </p>
                 <p>
                 <hr>

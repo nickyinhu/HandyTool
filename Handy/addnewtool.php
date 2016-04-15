@@ -71,6 +71,9 @@
                 session_destroy();
                 echo "<script> window.location.assign('index.php'); </script>";
             }
+            if (isset($_POST['back'])) {
+              echo "<script> window.location.assign('clerk.php'); </script>";
+            }
         ?>
 
       <form action = '' method = "post">
@@ -98,6 +101,7 @@
         </div></p>
         <p>
         <hr>
+            <button class = "btn btn-lg btn-primary btn-block" type = "submit" name = "back">Main Menu</button>
             <button class = "btn btn-lg btn-primary btn-block" type = "submit" name = "logout">Log Out</button>
         </p>
       </form>
