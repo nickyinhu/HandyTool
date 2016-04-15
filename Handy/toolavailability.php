@@ -24,7 +24,19 @@
 
             $result = $conn->query($sql) or die('Error querying database.');
 
+            $tool_ids = array();
             if ($result->num_rows > 0 ) {
+                switch ($tooltype) {
+                    case 'hand':
+                        echo '<p><h3>Hand Tools</h3></p>';
+                        break;
+                    case 'construction':
+                        echo '<p><h3>Construction Equipment</h3></p>';
+                        break;
+                    case 'power':
+                        echo '<p><h3>Power Tools</h3></p>';
+                        break;
+                }
                 echo '<p><table border="1">';
                 echo '<tr><th>Tool ID</th><th>Abbr. Description</th><th>Deposit ($)</th><th>Price/Day ($)</th></tr>';
                 while ($row = $result->fetch_assoc()) {
@@ -32,8 +44,9 @@
                          '</td><td align="left">&nbsp', $row['abbr'],
                          '</td><td align="center">',    $row['deposit'],
                          '</td><td align="center">',    $row['price'],'</td></tr>';
+                    $tool_ids[] = $row['tool_id'];
                 }
-                echo '</table></p><hr>';
+                echo '</table></p>';
                 $condition = 1;
                 if (isset($_POST['submit'])) {
                     if (isset($_POST['tool_id']) && is_numeric($_POST['tool_id'])) {
@@ -41,7 +54,7 @@
                         echo "<script> window.location.assign('tooldetail.php'); </script>";
                     } else {
                         echo '<script language="javascript">';
-                        echo 'alert("Please Enter a Valid Tool ID!")';
+                        echo 'alert("Please Select a Tool ID")';
                         echo '</script>';
                     }
                 }
@@ -57,8 +70,14 @@
         <div class = "container">
             <form class = "form-signin" role = "form" action = "" method = "post">
                 <?php if($condition == 1) { ?>
-                    <p>
-                    Part # <input type = "text" class = "form-control" name = "tool_id" autofocus>
+                    Select a tool to view detail
+                    <p>Part # 
+                    <select name="tool_id" style="width: 120px;">
+                        <option value="">Please select</option>
+                        <?php foreach ($tool_ids as $tool_id) {
+                            echo "<option value=\"$tool_id\">$tool_id</option>";
+                        } ?>
+                    </select>
                     <button class = "btn btn-lg btn-primary btn-block" type = "submit" name = "submit">Submit</button>
                     </p>
                 <?php } else { ?>
