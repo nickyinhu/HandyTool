@@ -18,8 +18,8 @@
                 session_destroy();
                 echo "<script> window.location.assign('index.php'); </script>";
             }
-            $msg1;
-            $msg2;
+            $msg1 = '';
+            $msg2 = '';
             $email = $_SESSION['login_user'];
             if (isset($_POST['checkavai'])) {
                 if (empty($_POST['tooltype'])) {
