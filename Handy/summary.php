@@ -67,8 +67,8 @@
                     }
                     echo "<script> window.location.assign('finalize.php'); </script>";
                 } else {
-                    echo "You have submitted your reservation, your reservation number is " . $_SESSION['resv_number'];                    
-                    header("refresh:2;url=finalize.php");
+                    echo "<h4>You have already submitted your reservation, your reservation number is " . $_SESSION['resv_number'] . '</h4>';
+                    // header("refresh:2;url=finalize.php");
                 }
             }
             if (isset($_POST['reset'])) {
@@ -77,6 +77,17 @@
                 unset($_SESSION['enddate']);
                 unset($_SESSION['resv_number']);
                 echo "<script> window.location.assign('makereservation.php'); </script>";
+            }
+            if (isset($_POST['logout'])) {
+                session_destroy();
+                echo "<script> window.location.assign('index.php'); </script>";
+            }
+            if (isset($_POST['back'])) {
+                unset($_SESSION['tool_list']);
+                unset($_SESSION['startdate']);
+                unset($_SESSION['enddate']);
+                unset($_SESSION['resv_number']);
+                echo "<script> window.location.assign('customer.php'); </script>";
             }
         ?>
 
@@ -97,6 +108,10 @@
                 <p>
                 <button class = "btn btn-lg btn-primary btn-block" type = "submit" id = "confirm" name = "confirm">Submit</button>
                 <button class = "btn btn-lg btn-primary btn-block" type = "submit" id = "reset" name = "reset">Reset</button>
+                </p>
+                <hr>
+                    <button class = "btn btn-lg btn-primary btn-block" type = "submit" name = "back">Main Menu</button>
+                    <button class = "btn btn-lg btn-primary btn-block" type = "submit" name = "logout">Log Out</button>
                 </p>
             </form>
         </div>

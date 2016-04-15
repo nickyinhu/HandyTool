@@ -66,7 +66,8 @@
         <div>
             <form class = "form-signin" role = "form" action = "" method = "post">
                 <p>
-                <button class = "btn btn-lg btn-primary btn-block" type = "button" id = "add" name = "add">Add More Tools</button>
+                <br>
+                <button class = "btn btn-lg btn-primary btn-block" type = "button" id = "add" name = "add">Add This Tool</button>
                 <button class = "btn btn-lg btn-primary btn-block" type = "button" id = "remove" name = "remove">Remove Last Tool</button>
                 </p>
                 <button class = "btn btn-lg btn-primary btn-block" type = "submit" name = "calculate">Calculate Total</button>

@@ -7,9 +7,10 @@
     $tooltype = $_GET["tooltype"];
     $startdate = $_GET["startdate"];
     $enddate = $_GET["enddate"];
-    if (isset($_SESSION['startdate']) && $_SESSION['startdate'] != $startdate) {
+    if (isset($_SESSION['startdate']) && $startdate && $_SESSION['startdate'] != $startdate) {
+        echo $_SESSION['startdate'];
         echo '&nbsp&nbsp<span style="color:#FF0000;text-align:center;">You cannot have different start date in one reservation!</span>';
-    } elseif (isset($_SESSION['enddate']) && $_SESSION['enddate'] != $enddate) {
+    } elseif (isset($_SESSION['enddate']) && $enddate && $_SESSION['enddate'] != $enddate) {
         echo '&nbsp&nbsp<span style="color:#FF0000;text-align:center;">You cannot have different end date in one reservation!</span>';
     }
     elseif (!validateDate($startdate)) {

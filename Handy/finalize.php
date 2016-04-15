@@ -26,6 +26,8 @@
                 $total_rental = $_SESSION['rental'];
                 $total_deposit = $_SESSION['deposit'];
                 $tool_list = $_SESSION['tool_list'];
+                $start = $_SESSION['startdate'];
+                $end = $_SESSION['enddate'];
                 $resv_number = $_SESSION['resv_number'];
                 if (isset($_POST['logout'])) {
                     session_destroy();
