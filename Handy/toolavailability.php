@@ -58,7 +58,7 @@
             <form class = "form-signin" role = "form" action = "" method = "post">
                 <?php if($condition == 1) { ?>
                     <p>
-                    Part # <input type = "text" class = "form-control" name = "tool_id" required autofocus>
+                    Part # <input type = "text" class = "form-control" name = "tool_id" autofocus>
                     <button class = "btn btn-lg btn-primary btn-block" type = "submit" name = "submit">Submit</button>
                     </p>
                 <?php } else { ?>
