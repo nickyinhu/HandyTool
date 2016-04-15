@@ -18,13 +18,6 @@
          if (empty($_SESSION['login_user'])) {
             die("You are not login yet!");
          }
-         include('dbconn.php');
-         global $conn;
-         if ($result->num_rows > 0 ) {
-            while($row = $result->fetch_assoc()) {
-               echo "id: " . $row["clerk_id"]. " - Name: " . $row["first_name"]. " " . $row["last_name"]. "<br>";
-            }
-         }
       ?>
 
 
