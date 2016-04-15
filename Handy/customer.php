@@ -21,6 +21,11 @@
                echo "id: " . $row["email"]. " - Name: " . $row["first_name"]. " " . $row["last_name"]. "<br>";
             }
          }
+
+         if (isset($_POST['logout'])) {
+             session_destroy();
+             echo "<script> window.location.assign('index.php'); </script>";
+         }
       ?>
 
       
@@ -34,10 +39,11 @@
          <div>
             <button type="submit" onClick="location.href='makereservation.php'">Make Reservation</button>
          </div>
+         <form class = "form-signin" role = "form" action = "" method = "post">
          <div>
-            <button type="submit" onClick="location.href='index.php'">Exit</button>
+            <button type="submit" name="logout">Exit</button>
          </div>
-         
+         </form>
 
       </div>
    </body>

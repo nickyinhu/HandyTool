@@ -13,7 +13,7 @@
             if (empty($_SESSION['login_user'])) {
                 die("You are not login yet!");
             }
-            $email     = $_SESSION['login_user'];            
+            $email     = $_SESSION['login_user'];
             $tooltype  = $_SESSION['tooltype'];
             $startdate = $_SESSION['startdate'];
             $enddate   = $_SESSION['enddate'];
@@ -59,6 +59,10 @@
             } elseif (isset($_POST['return'])) {
                 echo "<script> window.location.assign('checkavailability.php'); </script>";
             }
+            if (isset($_POST['logout'])) {
+                session_destroy();
+                echo "<script> window.location.assign('index.php'); </script>";
+            }
         ?>
      
         <div class = "container">
@@ -72,6 +76,10 @@
                     <h4></p>Your search returns no results, please adjust your search</p></h4>
                     <button class = "btn btn-lg btn-primary btn-block" type = "submit" name = "return">Return</button>
                 <?php } ?>
+                <p>
+                <hr>
+                    <button class = "btn btn-lg btn-primary btn-block" type = "submit" name = "logout">Log Out</button>
+                </p>
             </form>
         </div>
    </body>
