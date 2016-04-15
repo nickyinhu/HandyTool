@@ -1,5 +1,8 @@
 <?php
-	function availability ($tooltype, $startdate, $enddate) {
+	function get_availability ($tooltype, $startdate, $enddate) {
+        if (!isset($tooltype) || !isset($startdate) || !isset($enddate)) {
+            die("You need to provide tooltype, startdate, and enddate");
+        }
 		return "
         select t.tool_id, t.abbr_description as abbr, t.rental_price as price
         from tools as t
@@ -30,4 +33,16 @@
         )
         ";
 	}
+
+    function get_resv_summary ($id_list, $startdate, $enddate) {
+        if (!isset($id_list) || !isset($startdate) || !isset($enddate)) {
+            die("You need to provide id_list, startdate, and enddate");
+        }
+        return "
+                SELECT abbr_description as abbr,
+                    SUM(tools.rental_price * (DATEDIFF('$enddate', '$startdate') + 1)) AS rental, 
+                    SUM(tools.deposit * (DATEDIFF('$enddate', '$startdate') + 1)) AS deposit
+                FROM tools
+                WHERE tool_id in ($id_list)";
+    }
 ?>

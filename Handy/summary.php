@@ -13,6 +13,7 @@
         <?php
             session_start();
             include('dbconn.php');
+            include('sql.php');
             global $conn;
             if (empty($_SESSION['login_user'])) {
                 die("You are not login yet!");
@@ -22,7 +23,7 @@
                 session_destroy();
                 echo "<script> window.location.assign('index.php'); </script>";
             }
-            if (!isset($_SESSION['tool_list']) && empty($_)) {
+            if (!isset($_SESSION['tool_list']) || empty($_SESSION['tool_list'])) {
                 die('&nbsp&nbsp<span style="color:#FF0000;text-align:center;">Please add at least one tool to your list!</span>');
             }
             $start = $_SESSION['startdate'];
@@ -32,12 +33,9 @@
             $total_deposit = 0;
 
             $id_list = join(',',array_keys($tool_list));
-            $sql = "
-                SELECT abbr_description as abbr,
-                    (tools.rental_price * (DATEDIFF('$end', '$start') + 1)) AS rental, 
-                    (tools.deposit * (DATEDIFF('$end', '$start') + 1)) AS deposit
-                FROM tools
-                WHERE tool_id in ($id_list)";
+
+            $sql = get_resv_summary($id_list,$start,$end);
+
             $result = $conn->query($sql) or die('Error querying database.');
             if ($result->num_rows > 0 ) {
                 $row = $result->fetch_assoc();
@@ -46,14 +44,38 @@
             }
 
             if (isset($_POST['confirm'])) {
-                $_SESSION['rental'] = $total_rental;
-                $_SESSION['deposit'] = $total_deposit;
-                echo "<script> window.location.assign('finalize.php'); </script>";
+                if (!isset($_SESSION['resv_number'])) {
+                    $_SESSION['rental']  = $total_rental;
+                    $_SESSION['deposit'] = $total_deposit;
+                    $email = $_SESSION['login_user'];
+
+                    $resv_sql = "
+                        INSERT INTO reservation (start_date, end_date, total_price, total_deposit, customer_email)
+                        VALUES ('$start', '$end', '$total_rental', '$total_deposit', '$email')";
+                    $last_id = 0;
+                    if ($conn->query($resv_sql) === TRUE) {
+                        $last_id = $conn->insert_id;
+                    } else {
+                        die("Error: " . $resv_sql . "<br>" . $conn->error);
+                    }
+                    $_SESSION['resv_number'] = $last_id;
+                    $stmt = $conn->prepare("INSERT INTO reservation_contains (resv_number, tool_id) VALUES ('$last_id',?)");
+                    ksort($tool_list);
+                    foreach (array_keys($tool_list) as $id) {
+                        $stmt->bind_param("i", $id);
+                        $stmt->execute();
+                    }
+                    echo "<script> window.location.assign('finalize.php'); </script>";
+                } else {
+                    echo "You have submitted your reservation, your reservation number is " . $_SESSION['resv_number'];                    
+                    header("refresh:2;url=finalize.php");
+                }
             }
             if (isset($_POST['reset'])) {
                 unset($_SESSION['tool_list']);
                 unset($_SESSION['startdate']);
                 unset($_SESSION['enddate']);
+                unset($_SESSION['resv_number']);
                 echo "<script> window.location.assign('makereservation.php'); </script>";
             }
         ?>

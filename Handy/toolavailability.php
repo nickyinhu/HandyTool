@@ -20,7 +20,7 @@
             $condition = 0;
 
             include('sql.php');
-            $sql = availability($tooltype,$startdate,$enddate);
+            $sql = get_availability($tooltype,$startdate,$enddate);
 
             $result = $conn->query($sql) or die('Error querying database.');
 

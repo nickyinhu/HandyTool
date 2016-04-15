@@ -27,7 +27,7 @@
         $_SESSION['startdate'] = $startdate;
         $_SESSION['enddate'] = $enddate;
         include('sql.php');
-        $sql = availability($tooltype,$startdate,$enddate);
+        $sql = get_availability($tooltype,$startdate,$enddate);
 
         echo '<p>Tool</p>';
         echo '<p><select id="one" name="tool" action="makereservation.php" method="get">';
