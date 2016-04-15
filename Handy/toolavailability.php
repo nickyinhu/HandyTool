@@ -27,16 +27,23 @@
             if ($result->num_rows > 0 ) {
                 echo '<p><table border="1">';
                 echo '<tr><th>Tool ID</th><th>Abbr. Description</th><th>Deposit ($)</th><th>Price/Day ($)</th></tr>';
-                while ($row = $result->fetch_assoc())
-                    echo '<tr><td align="center">', $row['tool_id'],
+                while ($row = $result->fetch_assoc()) {
+                    echo '<tr><td align="center">',     $row['tool_id'],
                          '</td><td align="left">&nbsp', $row['abbr'],
-                         '</td><td align="center">', $row['deposit'],
-                         '</td><td align="center">', $row['price'],'</td></tr>';
+                         '</td><td align="center">',    $row['deposit'],
+                         '</td><td align="center">',    $row['price'],'</td></tr>';
+                }
                 echo '</table></p><hr>';
                 $condition = 1;
-                if (isset($_POST['submit']) && isset($_POST['tool_id'])) {
-                    $_SESSION['tool_id']= $_POST['tool_id'];
-                    echo "<script> window.location.assign('tooldetail.php'); </script>";
+                if (isset($_POST['submit'])) {
+                    if (isset($_POST['tool_id']) && is_numeric($_POST['tool_id'])) {
+                        $_SESSION['detail_tool_id']= $_POST['tool_id'];
+                        echo "<script> window.location.assign('tooldetail.php'); </script>";
+                    } else {
+                        echo '<script language="javascript">';
+                        echo 'alert("Please Enter a Valid Tool ID!")';
+                        echo '</script>';
+                    }
                 }
             } elseif (isset($_POST['return'])) {
                 echo "<script> window.location.assign('checkavailability.php'); </script>";

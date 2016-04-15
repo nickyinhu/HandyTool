@@ -34,6 +34,17 @@
         ";
 	}
 
+    function get_tool_detail ($tool_id) {
+        if (!isset($tool_id)) {
+            die("You need to provide id_list, startdate, and enddate");
+        }
+        return "
+            SELECT *
+            FROM tools
+            WHERE tool_id = '$tool_id'
+        ";
+    }
+
     function get_resv_summary ($id_list, $startdate, $enddate) {
         if (!isset($id_list) || !isset($startdate) || !isset($enddate)) {
             die("You need to provide id_list, startdate, and enddate");
