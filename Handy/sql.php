@@ -4,7 +4,7 @@
             die("You need to provide tooltype, startdate, and enddate");
         }
 		return "
-        select t.tool_id, t.abbr_description as abbr, t.rental_price as price
+        select t.tool_id, t.abbr_description as abbr, t.rental_price as price, t.deposit
         from tools as t
         where t.sold_date is null
         and t.tool_type = '$tooltype'
