@@ -65,10 +65,10 @@
                         $stmt->bind_param("i", $id);
                         $stmt->execute();
                     }
-                    echo "<script> window.location.assign('summary.php'); </script>";
+                    echo "<script> window.location.assign('resvSummary.php'); </script>";
                 } else {
                     echo "<h4>You have already submitted your reservation, your reservation number is " . $_SESSION['resv_number'] . '</h4>';
-                    // header("refresh:2;url=summary.php");
+                    // header("refresh:2;url=resvSummary.php");
                 }
             }
             if (isset($_POST['reset'])) {

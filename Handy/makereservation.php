@@ -84,7 +84,7 @@
         <script>
             $(document).ready(function() {
                 $("select#one").change(function() {
-                    $("div#menu2").load("second_menu.php?tooltype=" + $(this).val() + "&startdate=" + $("input#startdate").val() + "&enddate=" + $("input#enddate").val());
+                    $("div#menu2").load("secondAvailMenu.php?tooltype=" + $(this).val() + "&startdate=" + $("input#startdate").val() + "&enddate=" + $("input#enddate").val());
                 });
 
                 $("button#add").click(function(){
