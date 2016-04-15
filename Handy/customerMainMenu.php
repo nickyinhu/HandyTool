@@ -26,15 +26,15 @@
          global $conn;
           
 		  if (isset($_POST['view_profile'])) {
-             unset($_SESSION['detail_tool_id']);
+            
              echo "<script> window.location.assign('viewCustomerProfile.php'); </script>";
          }
 		 if (isset($_POST['check_tool_availability'])) {
-             unset($_SESSION['detail_tool_id']);
+           
              echo "<script> window.location.assign('checkavailability.php'); </script>";
          }
 		 if (isset($_POST['make_reservation'])) {
-             unset($_SESSION['detail_tool_id']);
+             
              echo "<script> window.location.assign('makereservation.php'); </script>";
          }
          if (isset($_POST['exit'])) {
