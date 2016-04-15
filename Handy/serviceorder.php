@@ -68,6 +68,14 @@
                }
             }
          }
+         if (isset($_POST['logout'])) {
+             session_destroy();
+             echo "<script> window.location.assign('index.php'); </script>";
+         }
+         if (isset($_POST['back'])) {
+             unset($_SESSION['detail_tool_id']);
+             echo "<script> window.location.assign('clerk.php'); </script>";
+         }
       ?>
 
       <form action = '' method = "post">
@@ -77,6 +85,10 @@
          <label>Estimated Cost of Repair ($): </label><input type="text" name="cost"><br>
          <div>
             <p><button type="submit" value="Submit" name="service">Submit New Service Order</button></p>
+
+            <hr>
+            <button class = "btn btn-lg btn-primary btn-block" type = "submit" name = "back">Main Menu</button>
+            <button class = "btn btn-lg btn-primary btn-block" type = "submit" name = "logout">Log Out</button></p>
          </div>
       </form>
 
