@@ -19,7 +19,7 @@
                 if (!isset($_SESSION['tool_list']) || empty($_SESSION['tool_list'])) {
                     echo '&nbsp&nbsp<span style="color:#FF0000;text-align:center;">Please add at least one tool to your list!</span>';
                 } else {
-                    echo "<script> window.location.assign('summary.php'); </script>";                    
+                    echo "<script> window.location.assign('submitResv.php'); </script>";                    
                 }
             }
             if (isset($_POST['reset'])) {
