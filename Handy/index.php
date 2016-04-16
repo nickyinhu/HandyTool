@@ -35,9 +35,11 @@
                }else {
                   $msg = 'Wrong credentials! Redirecting to registration...';
                   if ($database == 'clerk' ) {
-                     header("refresh:3;url=clerk_reg.php");
+                     
+					 echo "<script> window.location.assign('createClerkProfile.php')</script>";
                   } else {
-                     header("refresh:3;url=customer_reg.php");
+                     
+					 echo "<script> window.location.assign('createCustomerProfile.php')</script>";
                   }
                }
             }
