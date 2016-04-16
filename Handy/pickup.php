@@ -17,8 +17,10 @@
 				//read from db
 				$sql = "select Resv_number from Reservation where $row[Resv_number] = $Res";
 				$result = $conn->query($sql) or die('Error querying database.');
-				if($result->num_rows > 0)
+				if($result->num_rows > 0){
+					$_SESSION['res_num'] = $Res;
 					echo "<script> window.location.assign('PickUpMenu.php');</script>";
+				}
 				else{
 					echo "Cannot find the reservation!!";
 				}
