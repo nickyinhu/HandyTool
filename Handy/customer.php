@@ -29,7 +29,7 @@
       
       <div class = "container">
          <div>
-            <label><button type="submit" onClick="location.href='viewprofile.php'">View Profile</button></label>
+            <label><button type="submit" onClick="location.href='viewCustomerProfile.php'">View Profile</button></label>
          </div>
          <div>
             <label><button type="submit" onClick="location.href='checkavailability.php'">Check Tool Availability</button></label>
