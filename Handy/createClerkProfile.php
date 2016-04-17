@@ -32,6 +32,8 @@
                          VALUES ('$clerk_id','$password', '$first_name','$last_name')";
                      if ( mysqli_query($conn, $sql) ) {
                         echo "Successfully created new clerk profile";
+						$_SESSION['login_user']= $clerk_id;
+						
                      } else {
                         die("Error: " . mysqli_error($conn));
                      }
