@@ -12,28 +12,46 @@
          session_start();
          include('dbconn.php');
          global $conn;
+		 date_default_timezone_set('EST');
  
-         if ( ! empty( $_POST ) ) {
-              // Insert our data
-            $sql = "INSERT INTO Customer( Email, Password, First_name, Last_Name, Home_phone, Work_phone, Address ) 
-                VALUES ( '{$mysqli->real_escape_string($_POST['email'])}', '{$mysqli->real_escape_string($_POST['password'])}',
-                '{$mysqli->real_escape_string($_POST['first_name'])}', '{$mysqli->real_escape_string($_POST['last_name'])}','{$mysqli->real_escape_string($_POST['home_phone'])}','{$mysqli->real_escape_string($_POST['work_phone'])}','{$mysqli->real_escape_string($_POST['address'])}')";
-            
-            $insert = $mysqli->query($sql);
-  
-            // Print response from MySQL
-            if ( $insert ) {
-               echo "Success! Row ID: {$mysqli->insert_id}";
+        if (isset($_POST['create_profile'])) {
+            if (!($_POST['email']) || empty($_POST['password']) ||empty($_POST['confirm_password']) ||empty($_POST['first_name'])||empty($_POST['last_name']) ||empty($_POST['home_phone']) ||empty($_POST['work_phone']) ||empty($_POST['address'])){
+                echo '<script language="javascript">';
+                echo 'alert("Please fill all fields")';
+                echo '</script>';
             } else {
-               die("Error: {$mysqli->errno} : {$mysqli->error}");
+               $email   = $_POST['email'];
+               $password = $_POST['password'];
+			   $confirm_password = $_POST['confirm_password'];
+               $first_name = $_POST['first_name'];
+               $last_name = $_POST['last_name'];
+			   $home_phone = $_POST['home_phone'];
+			   $work_phone = $_POST['work_phone'];
+			   $address = $_POST['address'];
+			   $today = date("Y-m-d");
+			   
+               if ($password!=$confirm_password) {
+                  echo '&nbsp&nbsp<span style="color:#FF0000;text-align:center;">Password does not match!</span>';
+               } else {
+                  
+                     $sql = "INSERT INTO customer( email, password, first_name, last_name, home_phone, work_phone, address,create_date) 
+                         VALUES ('$email','$password', '$first_name','$last_name','$home_phone','$work_phone', '$address','$today')";
+                     if ( mysqli_query($conn, $sql) ) {
+                        echo "Successfully created new clerk profile";
+						$_SESSION['login_user']= $email;
+						
+                     } else {
+                        die("Error: " . mysqli_error($conn));
+                     }
+                  
+               }
             }
-  
-            // Close our connection
-            $mysqli->close();
-            }
+         }
+ 
       ?>
 
-      <form>
+
+      <form action = '' method = "post">
       Email Address (Login): <input type="text" name="email"><br>
       Password: <input type="text" name="password"><br>
       Confirm Password: <input type="text" name="confirm_password"><br>
@@ -43,9 +61,16 @@
       Work Phone: <input type="text" name="work_phone"><br>
       Address: <input type="text" name="address"><br>
       <div>
-         <button type="submit" value="Submit">Submit</button>
+         <p><button type="submit" value="Submit" name="create_profile">Submit</button></p>
       </div>
       </form>
+      <div>
+            <label></label><button type="submit" onClick="location.href='customer.php'">Main Menu</button>
+            <label></label><button type="submit" onClick="location.href='index.php'">Exit</button>
+            </div>
+            </div>
+         </p>
+
 
    </body>
 </html>
