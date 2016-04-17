@@ -3,17 +3,25 @@
 
     <head>
         <title>Handyman Tool</title>
-        <script src="https://code.jquery.com/jquery-1.10.2.js"></script>
+        <style type="text/css">
+            label{
+              display:inline-block;
+              height: 20px;
+              margin: 0 auto;
+              width: 90px;
+            }
+        </style>
     </head>
 
 
     <body>
-        <h2>Prifile</h2>
+        <h2>Customer Prifile</h2>
    
         <?php
             session_start();
             include('dbconn.php');
-            
+            include('sql.php');
+
             global $conn;
             if (empty($_SESSION['login_user'])) {
                 die("You are not login yet!");
@@ -25,43 +33,21 @@
             }
           
             $email = $_SESSION['login_user'];
-	
+    
             $sql = "SELECT email, first_name, last_name, home_phone, work_phone, address FROM customer WHERE email='$email' ";
 
             $result = $conn->query($sql) or die('Error querying database.');
             if ($result->num_rows > 0 ) {
                 $row = $result->fetch_assoc();
                 $email = $row['email'];
-				$first_name = $row['first_name'];
-				$last_name = $row['last_name'];
-				$home_phone = $row['home_phone'];
-				$work_phone = $row['work_phone'];
-				$address = $row['address'];
+                $first_name = $row['first_name'];
+                $last_name = $row['last_name'];
+                $home_phone = $row['home_phone'];
+                $work_phone = $row['work_phone'];
+                $address = $row['address'];
                 
             }
-			
-			
-			$sql_resv_history = "SELECT resv_number, start_date, end_date, total_price, total_deposit  FROM reservation WHERE customer_email='$email' ORDER BY create_date DESC";
-
-            $result2 = $conn->query($sql_resv_history) or die('Error querying database.');
-            
-            $resv_no = array();
-            if ($result2->num_rows > 0 ) {
-              
-                echo '<p><table border="1">';
-                echo '<tr><th>Resv_#</th><th>Tools</th><th>Start</th><th>End</th></tr>Rental Price($)</th></tr>Deposit($)</th></tr>Pick-up Clerk</th></tr>Drop-off Clerk</th></tr>';
-                while ($row2 = $result2->fetch_assoc()) {
-                    echo '<tr><td align="center">',     $row['resv_number'],
-                         '</td><td align="left">&nbsp', $row['start_date'],
-                         '</td><td align="center">',    $row['end_date'],
-                         '</td><td align="center">',    $row['total_price'],
-						 '</td><td align="center">',    $row['total_deposit'],
-						 '</td></tr>';
-                    $resv_no[] = $row['resv_number'];
-                }
-                echo '</table></p>';
-           
-            } 
+            $customer_resv_sql = get_customer_profile($email);
 
             if (isset($_POST['logout'])) {
                 session_destroy();
@@ -80,21 +66,42 @@
             <form class = "form-signin" role = "form" method = "post">
             
                 <hr>
-                <p>Email Address:  <?php echo $email ?></p>
-                <p>First Name:  <?php echo $first_name ?></p>
-                <p>Last Name:  <?php echo $last_name ?></p>
-                <p>Home Phone:  <?php echo $home_phone ?></p>
-                <p>Work Phone:  <?php echo $work_phone ?></p>
-                <p>Address:  <?php echo $address ?></p>
+                <p><label>Email:</label>  <?php echo $email ?></p>
+                <p><label>First Name:</label>  <?php echo $first_name ?></p>
+                <p><label>Last Name:</label>  <?php echo $last_name ?></p>
+                <p><label>Home Phone:</label>  <?php echo $home_phone ?></p>
+                <p><label>Work Phone:</label>  <?php echo $work_phone ?></p>
+                <p><label>Address:</label>  <?php echo $address ?></p>
            
       
              <hr>
              <h3> Reservation History</h3>
+             <p>
+             <?php
+                 $customer_resv_result = $conn->query($customer_resv_sql) or die('Error querying database.');
+                if ($customer_resv_result->num_rows > 0 ) {
+                    echo '<p><table border="1">';
+                    echo '<tr><th>Resv #</th><th>Tools</th><th>Start</th><th>End</th><th>Rental Price($)</th><th>Deposit($)</th><th>Pick-up Clerk</th><th>Drop-off Clerk</th></tr>';
+                    while ($row = $customer_resv_result->fetch_assoc()) {
+                        echo '<tr><td align="center">', $row['resv_number'],
+                         '</td><td align="left">&nbsp', $row['abbr'],
+                         '</td><td align="center">',    $row['start'],
+                         '</td><td align="center">',    $row['end'],
+                         '</td><td align="center">',    $row['rental_price'],
+                         '</td><td align="center">',    $row['deposit'],
+                         '</td><td align="left">',    $row['pickup_clerk'],
+                         '</td><td align="left">',    $row['dropoff_clerk'],
+                         '</td></tr>';
+                    }
+                    echo '</table></p>';
+                }
+            ?>
+            </p>
   
-             <hr>
-                    <button class = "btn btn-lg btn-primary btn-block" type = "submit" name = "back">Main Menu</button>
-                    <button class = "btn btn-lg btn-primary btn-block" type = "submit" name = "logout">Log Out</button>
-                </p>
+            <hr>
+            <button class = "btn btn-lg btn-primary btn-block" type = "submit" name = "back">Main Menu</button>
+            <button class = "btn btn-lg btn-primary btn-block" type = "submit" name = "logout">Log Out</button>
+            </p>
           </form>
         </div>
    </body>

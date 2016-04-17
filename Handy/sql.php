@@ -92,6 +92,28 @@
                 WHERE tool_id in ($id_list)";
     }
 
+    function get_customer_profile ($email) {
+        return "
+        SELECT
+            r.resv_number,
+            t.abbr_description as abbr,
+            r.start_date as start,
+            r.end_date as end,
+            t.rental_price,
+            t.deposit,
+            IFNULL(pc.first_name, 'N/A') as pickup_clerk,
+            IFNULL(dc.first_name, 'N/A') as dropoff_clerk
+        From
+            reservation_contains rc
+            LEFT JOIN tools as t  on rc.tool_id = t.tool_id
+            LEFT JOIN reservation r on r.resv_number = rc.resv_number
+            LEFT JOIN clerk as pc on pc.clerk_id = r.pickup_clerk_id
+            LEFT JOIN clerk as dc on pc.clerk_id = r.dropoff_clerk_id
+            WHERE r.customer_email = '$email'
+            ORDER BY r.resv_number DESC, t.tool_id
+        ";
+    }
+
     function get_tool_report ($year, $month) {
         include('functions.php');
         $month_end = get_end_of_month($year, $month);
