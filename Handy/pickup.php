@@ -4,6 +4,7 @@
 	</head>
 
 	<body>
+		<h2>Pick Up Reservation</h2>
 		<?php
 			session_start();
 			include('dbconn.php');
@@ -12,29 +13,33 @@
 				die("You are not login yet!");
 				header("refresh: 3; url = index.php");
 			}
-			if(isset($_POST["ResNum"])){
-				$Res = $_POST["ResNum"];
-				//read from db
-				$sql = "select Resv_number from Reservation where $row[Resv_number] = $Res";
-				$result = $conn->query($sql) or die('Error querying database.');
-				if($result->num_rows > 0){
-					$_SESSION['res_num'] = $Res;
-					echo "<script> window.location.assign('PickUpMenu.php');</script>";
+			if (isset($_POST['pickup'])) {
+				if($_POST['ResNum']){
+					$Res = $_POST["ResNum"];
+					//read from db
+					$sql = "select resv_number from reservation where resv_number = '$Res'";
+					$result = $conn->query($sql) or die('Error querying database.');
+					if($result->num_rows > 0){
+						$_SESSION['res_num'] = $Res;
+						echo "<script> window.location.assign('PickUpMenu.php');</script>";
+					}
+					else{
+						echo '<script language="javascript">';
+						echo "alert(\"Cannot find reservation for number $Res\")";
+						echo '</script>';
+					}
+				} else {
+					echo '<script language="javascript">';
+					echo 'alert("Please Enter Reservation Number")';
+					echo '</script>';
 				}
-				else{
-					echo "Cannot find the reservation!!";
-				}
-					
-			}		
+			}
 		?>
 
 		<form action = '' method = "post">
-			<label> Please input Reservation number: </label> 
+			<p>Reservation number for Pickup: </label> 
 			<input type = "text" name = "ResNum"><br>
-			<input type = "submit">
+			<p><button type = "submit" name = "pickup">Submit</button></p>
 		</form>
-
-
-
 	</body>
 </html>
