@@ -74,6 +74,7 @@
 			echo "Deposit Held: $".$deposit_held."<br>";
 			echo "             --------------------";
 			echo "Total:        $".$total."<br>";
+			session_destroy()；
 	
 		?>
 			}
