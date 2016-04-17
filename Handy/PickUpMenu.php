@@ -82,6 +82,7 @@
 					$conn->query($contract_sql) or die("Error update database");
 					unset($_SESSION['res_num']);
 					$_SESSION['contract_num'] = $Res;
+					$_SESSION['credit_card_number'] = $credit_card; 
 					echo "<script> window.location.assign('RentalContract.php');</script>";
 				} else {
 					echo '<script language="javascript">';
