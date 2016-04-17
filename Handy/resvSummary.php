@@ -2,7 +2,14 @@
 
     <head>
         <title>Handyman Tool</title>
-        <script src="https://code.jquery.com/jquery-1.10.2.js"></script>
+        <style type="text/css">
+            label{
+              display:inline-block;
+              height: 30px;
+              margin: 0 auto;
+              width: 35px;
+            }
+        </style>
     </head>
 
 
@@ -50,11 +57,11 @@
             <form class = "form-signin" role = "form" method = "post">
                 <?php if ($condition == 1) { ?>
                 <h4>Reservation Number: <?php echo $resv_number ?></h4>
-                <p><h3><?php 
+                <p><h4><?php 
                 ksort($tool_list);
                 foreach ($tool_list as $id => $abbr) {
-                    echo "<p>$id. $abbr</p>";
-                }?></h3></p>
+                    echo "<p><label>#$id</label> $abbr</p>";
+                }?></h4></p>
                 <hr>
                 <p>Start Date <?php echo $start ?></p>
                 <p>End Date&nbsp <?php echo $end ?></p>
