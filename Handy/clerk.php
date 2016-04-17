@@ -39,7 +39,7 @@
             <label></label><button type="submit" onClick="location.href='selltool.php'">Sell Tool</button></div>
          </div>
          <div>
-            <label></label><button type="submit" onClick="location.href='report.php'">Generate Report</button></div>
+            <label></label><button type="submit" onClick="location.href='reportMenu.php'">Generate Report</button></div>
          </div>
          <p>
          <div>
