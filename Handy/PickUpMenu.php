@@ -56,6 +56,8 @@
 			$row_res = $result_res->fetch_assoc();
 			$deposit = $row_res['total_deposit'];
 			$cost = $row_res['total_price'] + $deposit;
+			$_SESSION['deposit'] = $deposit;
+			$_SESSION['cost'] = $cost;
 
 			echo "<label>Deposit Required:</label>$ $deposit<br>";
 			echo "<label>Estimated Cost:</label>$ $cost<br>";
