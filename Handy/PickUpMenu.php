@@ -92,6 +92,10 @@
 					echo '</script>';
 				}
 			}
+			if (isset($_POST['back'])) {
+             			session_destroy();
+             			echo "<script> window.location.assign('pickup.php'); </script>";
+         		}
 		?>
 
 		<div>
@@ -102,6 +106,12 @@
 				<label>Credit Card Number</label><input type = "text" name = "credit_card"><br>
 				<label>Expiration</label><input type = "text" name = "expire_date"><br>
 				<br><button class = "btn btn-lg btn-primary btn-block" type = "submit" name = "complete">Complete Pick-Up</button>
+			
+
+            			<hr>
+            			<button class = "btn btn-lg btn-primary btn-block" type = "submit" name = "back">Back</button>
+            		
+         		
 			</form>
 		</div>
 	</body>
