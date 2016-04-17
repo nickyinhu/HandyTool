@@ -65,15 +65,12 @@
 			$tool_detail = "";
 			//tool ID detail
 			if(isset($_POST['viewdetail'])){
-				$tool_id = $_POST['detail'];
-				$sql_tool = "select full_description from tools where tool_id = $tool_id";
-				$result_tool = $conn->query($sql_tool) or die('Error querying database.');
-				if ($result_tool->num_rows > 0) {
-					$row = $result_tool->fetch_assoc();
-					$tool_full = $row['full_description'];
-					$tool_detail = "Tool $tool_id: $tool_full<br>";
-				}
+				$_SESSION['detail_tool_id']= $_POST['detail'];
+				
+                echo "<script> window.location.assign('tooldetail.php'); </script>";
 			}
+				
+				
 			if(isset($_POST["complete"])) {
 				if ($_POST['credit_card'] && $_POST['expire_date']) {
 					$credit_card = $_POST['credit_card'];
@@ -102,6 +99,14 @@
 				<label>Credit Card Number</label><input type = "text" name = "credit_card"><br>
 				<label>Expiration</label><input type = "text" name = "expire_date"><br>
 				<br><button class = "btn btn-lg btn-primary btn-block" type = "submit" name = "complete">Complete Pick-Up</button>
+                
+                </form>
+      <div>
+            <label></label><button type="submit" onClick="location.href='clerk.php'">Main Menu</button>
+            <label></label><button type="submit" onClick="location.href='index.php'">Log Out</button>
+            </div>
+            </div>
+         </p>
 			</form>
 		</div>
 	</body>
