@@ -75,9 +75,18 @@
 			echo "             --------------------";
 			echo "Total:        $".$total."<br>";
 			session_destroy()；
+			if (isset($_POST['back'])) {
+             			echo "<script> window.location.assign('clerk.php'); </script>";
+         		}
 	
 		?>
-			}
+		<form action = '' method = "post">
+		
+			<div>
+            			<button class = "btn btn-lg btn-primary btn-block" type = "submit" name = "back">Back</button>
+            		
+         		</div>
+		</form>	
 	
 	</body>
 </html>
