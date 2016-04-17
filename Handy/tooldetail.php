@@ -47,7 +47,7 @@
          </p>
       </form>
       <div>
-            <label></label><button type="submit" onClick="location.href='customer.php'">Main Menu</button>
+          
             <label></label><button type="submit" onClick="location.href='index.php'">Exit</button>
             </div>
             </div>
