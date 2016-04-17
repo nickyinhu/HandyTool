@@ -96,6 +96,10 @@
              			session_destroy();
              			echo "<script> window.location.assign('pickup.php'); </script>";
          		}
+         		if (isset($_POST['logout'])) {
+                	session_destroy();
+                	echo "<script> window.location.assign('index.php'); </script>";
+            }
 		?>
 
 		<div>
@@ -110,6 +114,7 @@
 
             			<hr>
             			<button class = "btn btn-lg btn-primary btn-block" type = "submit" name = "back">Back</button>
+            			<button class = "btn btn-lg btn-primary btn-block" type = "submit" name = "logout">Log Out</button>
             		
          		
 			</form>
