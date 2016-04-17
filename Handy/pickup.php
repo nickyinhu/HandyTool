@@ -34,12 +34,28 @@
 					echo '</script>';
 				}
 			}
+			if (isset($_POST['back'])) {
+             			unset($_SESSION['res_num']);
+             			echo "<script> window.location.assign('clerk.php'); </script>";
+         		}
+         		if (isset($_POST['logout'])) {
+                		session_destroy();
+                		echo "<script> window.location.assign('index.php'); </script>";
+            		}
+			
 		?>
 
 		<form action = '' method = "post">
 			<p>Reservation number for Pickup: </label> 
 			<input type = "text" name = "ResNum"><br>
 			<p><button type = "submit" name = "pickup">Submit</button></p>
+			<div>
+            			<p><button type="submit" value="Submit" name="service">Submit New Service Order</button></p>
+
+            			<hr>
+            			<button class = "btn btn-lg btn-primary btn-block" type = "submit" name = "back">Back</button>
+            			<button class = "btn btn-lg btn-primary btn-block" type = "submit" name = "logout">Log Out</button>
+         		</div>
 		</form>
 	</body>
 </html>
