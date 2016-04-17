@@ -39,7 +39,8 @@
 
       </form>
       <div>
-            <label></label><button type="submit" onClick="location.href='toolavailability.php'">Check Tool Availability</button>
+      <INPUT TYPE="button" VALUE="Back" onClick="history.go(-1);">
+            
             
             </div>
             </div>
