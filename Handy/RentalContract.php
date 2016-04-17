@@ -94,12 +94,16 @@
 			if (isset($_POST['back'])) {
              			echo "<script> window.location.assign('clerk.php'); </script>";
          		}
+         		if (isset($_POST['logout'])) {
+                		echo "<script> window.location.assign('index.php'); </script>";
+            }
 
 		?>
 			}
 		<form action = '' method = "post">
 			<div>
             			<button class = "btn btn-lg btn-primary btn-block" type = "submit" name = "back">Back to Main</button>
+            			<button class = "btn btn-lg btn-primary btn-block" type = "submit" name = "logout">Log Out</button>
          		</div>
 		</form>
 	
