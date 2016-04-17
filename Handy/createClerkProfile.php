@@ -27,14 +27,13 @@
                if ($password!=$confirm_password) {
                   echo '&nbsp&nbsp<span style="color:#FF0000;text-align:center;">Password does not match!</span>';
                } else {
-                  include('sql.php');
- 
+                  
                      $sql = "INSERT INTO clerk( clerk_id, password, first_name, last_name ) 
                          VALUES ('$clerk_id','$password', '$first_name','$last_name')";
                      if ( mysqli_query($conn, $sql) ) {
-                        echo "Successfully added Service Order";
+                        echo "Successfully created new clerk profile";
                      } else {
-                        die("Error: " . mysqli_error($con));
+                        die("Error: " . mysqli_error($conn));
                      }
                   
                }
@@ -43,7 +42,7 @@
  
       ?>
 
-      <form>
+      <form action = '' method = "post">
       Clerk ID: <input type="text" name="clerk_id"><br>
       Password: <input type="text" name="password"><br>
       Confirm Password: <input type="text" name="confirm_password"><br>
