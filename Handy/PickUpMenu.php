@@ -107,8 +107,7 @@
 				<label>Credit Card Number</label><input type = "text" name = "credit_card"><br>
 				<label>Expiration</label><input type = "text" name = "expire_date"><br>
 				<br><button class = "btn btn-lg btn-primary btn-block" type = "submit" name = "complete">Complete Pick-Up</button>
-<<<<<<< HEAD
-                
+
                 </form>
       <div>
             <label></label><button type="submit" onClick="location.href='clerk.php'">Main Menu</button>
@@ -116,15 +115,11 @@
             </div>
             </div>
          </p>
-=======
+
 			
 
-            			<hr>
-            			<button class = "btn btn-lg btn-primary btn-block" type = "submit" name = "back">Back</button>
-            			<button class = "btn btn-lg btn-primary btn-block" type = "submit" name = "logout">Log Out</button>
             		
-         		
->>>>>>> 96881422d3cd97ad472f88e0eb54952692bc6a58
+
 			</form>
 		</div>
 	</body>
