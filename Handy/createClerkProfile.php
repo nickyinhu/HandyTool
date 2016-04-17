@@ -12,32 +12,35 @@
          session_start();
          include('dbconn.php');
          global $conn;
- 
-         if ( ! empty( $_POST ) ) {
-              // Insert our data
-            $sql = "INSERT INTO Clerk( Clerk_id, Password, First_name, Last_Name ) 
-                VALUES ( '{$mysqli->real_escape_string($_POST['clerk_id'])}', '{$mysqli->real_escape_string($_POST['password'])}',
-                '{$mysqli->real_escape_string($_POST['first_name'])}', '{$mysqli->real_escape_string($_POST['last_name'])}')";
-            
-            $insert = $mysqli->query($sql);
-  
-            // Print response from MySQL
-            if ( $insert ) {
-               echo "Success! Row ID: {$mysqli->insert_id}";
-            } else {
-               die("Error: {$mysqli->errno} : {$mysqli->error}");
-            }
-  
-            // Close our connection
-            $mysqli->close();
-            }
-			
-			if (isset($_POST['login'])) {
-             session_destroy();
-             echo "<script> window.location.assign('index.php'); </script>";
-         }
 		 
-			
+		  if (isset($_POST['create_profile'])) {
+            if (!($_POST['clerk_id']) || empty($_POST['password']) ||empty($_POST['confirm_password']) ||empty($_POST['first_name'])||empty($_POST['last_name'])){
+                echo '<script language="javascript">';
+                echo 'alert("Please fill all fields")';
+                echo '</script>';
+            } else {
+               $clerk_id   = $_POST['clerk_id'];
+               $password = $_POST['password'];
+			   $confirm_password = $_POST['confirm_password'];
+               $first_name = $_POST['first_name'];
+               $last_name = $_POST['last_name'];
+               if ($password!=$confirm_password) {
+                  echo '&nbsp&nbsp<span style="color:#FF0000;text-align:center;">Password does not match!</span>';
+               } else {
+                  include('sql.php');
+ 
+                     $sql = "INSERT INTO clerk( clerk_id, password, first_name, last_name ) 
+                         VALUES ('$clerk_id','$password', '$first_name','$last_name')";
+                     if ( mysqli_query($conn, $sql) ) {
+                        echo "Successfully added Service Order";
+                     } else {
+                        die("Error: " . mysqli_error($con));
+                     }
+                  
+               }
+            }
+         }
+ 
       ?>
 
       <form>
@@ -47,10 +50,17 @@
       First Name: <input type="text" name="first_name"><br>
       Last Name: <input type="text" name="last_name"><br>
       <div>
-         <p><button type="submit" value="Submit">Submit</button></p>
-         <p><button type = "submit" name = "login">Log in</button></p>
+         <p><button type="submit" value="Submit" name="create_profile">Submit</button></p>
+         
       </div>
       </form>
+      
+         <div>
+            <label></label><button type="submit" onClick="location.href='clerk.php'">Main Menu</button>
+            <label></label><button type="submit" onClick="location.href='index.php'">Exit</button>
+            </div>
+         </div>
+         </p>
 
    </body>
 </html>
