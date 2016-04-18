@@ -32,28 +32,22 @@
                 }
                 echo '</table></p>';
 			   }
+            if (isset($_POST['logout'])) {
+                session_destroy();
+                echo "<script> window.location.assign('index.php'); </script>";
+            }
 
   
       ?>
 
 
-      </form>
       <div>
-      <INPUT TYPE="button" VALUE="Back" onClick="history.go(-1);">
-            
-            
-            </div>
-            </div>
-         </p>
+      <form action = '' method = "post">
+      <input TYPE="button" VALUE="Back" onClick="history.go(-1);"></input>
+
+      <p><button class = "btn btn-lg btn-primary btn-block" type = "submit" name = "logout" method="post">Log Out</button></p>
       </form>
-      <div>
-          
-            <label></label><button type="submit" onClick="location.href='index.php'">Exit</button>
-            </div>
-            </div>
-         </p>
-
-
+      </div>
    </body>
 </html>
 
