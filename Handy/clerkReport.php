@@ -21,6 +21,7 @@
             $monthName = date("F", mktime(0, 0, 0, date($month), 10));
             echo "<h2>$year $monthName Clerk Report </h2>";
             $clerk_report_sql = get_clerk_report($year,$month);
+            echo $clerk_report_sql;
             $clerk_report_result = $conn->query($clerk_report_sql) or die("Error query database");
             if ($clerk_report_result->num_rows > 0) {
                 echo '<p><table border="1">';

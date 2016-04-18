@@ -188,14 +188,14 @@
                 SELECT c.clerk_id, c.first_name, c.last_name, count(pickup_clerk_id) as pick_up_count,
                 0 as drop_off_count
                 FROM reservation as r
-                LEFT JOIN clerk as c on c.clerk_id = r.pickup_clerk_id
+                JOIN clerk as c on c.clerk_id = r.pickup_clerk_id
                 and r.end_date>='$month_start' and r.end_date <= '$month_end'
                 GROUP BY c.clerk_id
             union
                 SELECT c.clerk_id, c.first_name, c.last_name, 0 as pick_up_count,
                 count(dropoff_clerk_id) as drop_off_count
                 FROM reservation as r
-                LEFT JOIN clerk as c on c.clerk_id = r.dropoff_clerk_id
+                JOIN clerk as c on c.clerk_id = r.dropoff_clerk_id
                     and r.end_date>='$month_start' and r.end_date <= '$month_end'
                 GROUP BY c.clerk_id
             ) as resv_count
