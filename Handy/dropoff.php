@@ -18,7 +18,7 @@
 				if($_POST['ResNum']){
 					$Res = $_POST["ResNum"];
 					//read from db
-					$sql = "select resv_number from reservation where resv_number = '$Res'";
+					$sql = "select * from reservation where resv_number = '$Res'";
 					$result = $conn->query($sql) or die('Error querying database.');
 					if($result->num_rows > 0){
 						$row = $result->fetch_assoc();
