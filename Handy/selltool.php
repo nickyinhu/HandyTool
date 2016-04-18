@@ -9,30 +9,33 @@
       <h2>Service Order Request</h2> 
       <?php
          session_start();
+		 include('dbconn.php');
+         global $conn;
+		 
          if (empty($_SESSION['login_user'])) {
             die("You are not login yet!");
          }
          $login_user = $_SESSION['login_user'];
-         include('dbconn.php');
-         global $conn;
-
+        
          if (isset($_POST['sell'])) {
-
             $toolid = $_POST['toolid'];
          
             $sql = "UPDATE tools SET purchase_price = purchase_price * 0.5, sold_date = CURDATE() WHERE tool_id = '$toolid'";
-            
-            $query = "SELECT tool_id, purchase_price FROM tools WHERE tool_id = '$toolid'";
-            $result = mysql_query($query);
-
+			if ( mysqli_query($conn, $sql) ) {
+                        echo "tool sold successfully!";
+                     } else {
+                        die("Error: " . mysqli_error($con));
+                     }
+			
+            $sql_sold = "SELECT tool_id, purchase_price,sold_date FROM tools WHERE tool_id = '$toolid'";
+            $result = $conn->query($sql) or die('Error querying database.');
+			if ($result->num_rows > 0 ){
             echo "<table>";
             while($row = mysql_fetch_array($result)){   //Creates a loop to loop through results
-            echo "<tr><td>" . $row['tool_id'] . "</td><td>" . $row['purchase_price'] . "</td></tr>";  //$row['index'] the index here is a field name
+            echo "<tr><td>" . $row['tool_id'] . "</td><td>" . $row['purchase_price'] . "</td></tr>".$row['sold_price']."</td></tr>";  //$row['index'] the index here is a field name
             }
-
             echo "</table>";
-
-
+			}
          }
       ?>
 
@@ -53,5 +56,3 @@
 
    </body>
 </html>
-
-  

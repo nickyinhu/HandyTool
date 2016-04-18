@@ -35,14 +35,14 @@
 			//display clerk name
 			echo "Clerk on Duty: ".$row_clerk['first_name']." ".$row_clerk['last_name']."<br>";
 			//update reservation table, add dropoff clerk id
-			$sql_dropoff_clerk = "UPDATE reservation SET dropoff_clerk_id = '$clerk_id' where resv_number = $res_num";
+			$sql_dropoff_clerk = "UPDATE reservation SET dropoff_clerk_id = '$clerk_id' where resv_number = '$res_num'";
 			$conn->query($sql_dropoff_clerk) or die("Error update database");
 
 			//customer name
 			//find out customer email
 			$sql_customer = "select customer_email from reservation where resv_number = $res_num";
 			$result_customer = $conn->query($sql_customer);
-			$row_customer = $result_customer->fetch_assoc()；
+			$row_customer = $result_customer->fetch_assoc();
 			$customer_email = $row_customer['customer_email'];
 			//find out customer name according to email
 			$sql_cus_name =  "select first_name, last_name from customer where email = $customer_email";
@@ -57,8 +57,8 @@
 
 			//start date and end date
 			$sql_date = "select start_date, end_date from Reservation where resv_number = $res_num";
-			$result_date = $conn->query($sql_date)；
-			$row_date = $result_date->fetch_assoc()；
+			$result_date = $conn->query($sql_date);
+			$row_date = $result_date->fetch_assoc();
 			echo "Start Date: ".$row_date['start_date']."  End Date: ".$row_date['end_date']."<br>";
 
 			//display rental price and deposit held 
@@ -74,7 +74,7 @@
 			echo "Deposit Held: $".$deposit_held."<br>";
 			echo "             --------------------";
 			echo "Total:        $".$total."<br>";
-			session_destroy()；
+			session_destroy();
 			if (isset($_POST['back'])) {
              			echo "<script> window.location.assign('clerk.php'); </script>";
          		}
