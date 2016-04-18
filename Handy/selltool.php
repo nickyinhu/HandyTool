@@ -6,7 +6,7 @@
    </head>
 
    <body>
-      <h2>Service Order Request</h2> 
+      <h2>Sell Tools</h2> 
       <?php
          session_start();
 		 include('dbconn.php');
@@ -20,19 +20,19 @@
          if (isset($_POST['sell'])) {
             $toolid = $_POST['toolid'];
          
-            $sql = "UPDATE tools SET purchase_price = purchase_price * 0.5, sold_date = CURDATE() WHERE tool_id = '$toolid'";
+            $sql = "UPDATE tools SET purchase_price = purchase_price * 0.5, sold_date = CURDATE()WHERE tool_id = '$toolid'";
 			if ( mysqli_query($conn, $sql) ) {
                         echo "tool sold successfully!";
                      } else {
                         die("Error: " . mysqli_error($con));
                      }
 			
-            $sql_sold = "SELECT tool_id, purchase_price,sold_date FROM tools WHERE tool_id = '$toolid'";
-            $result = $conn->query($sql) or die('Error querying database.');
+            $sql_sold = "SELECT tool_id, purchase_price, sold_date FROM tools WHERE tool_id = '$toolid'";
+            $result = $conn->query($sql_sold) or die('Error querying database.');
 			if ($result->num_rows > 0 ){
             echo "<table>";
-            while($row = mysql_fetch_array($result)){   //Creates a loop to loop through results
-            echo "<tr><td>" . $row['tool_id'] . "</td><td>" . $row['purchase_price'] . "</td></tr>".$row['sold_price']."</td></tr>";  //$row['index'] the index here is a field name
+            while($row = $result->fetch_assoc()){   //Creates a loop to loop through results
+            echo "<tr><td>" . $row['tool_id'] . "</td><td>" . $row['purchase_price'] . "</td></tr>".$row['sold_date']."</td></tr>";  //$row['index'] the index here is a field name
             }
             echo "</table>";
 			}

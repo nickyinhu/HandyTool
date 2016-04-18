@@ -86,13 +86,13 @@
         <label>Full Description:</label>
           <input type="text" name="full" ><br>
         <label>Tool Type:</label>
-           <select name="tooltype">
+           <select name="tooltype" class="tooltype">
               <option value="construction">Construction</option>
               <option value="hand">Hand</option>
                <option value="power">Power</option>
            </select>
         <div class = "input_fields_wrap">
-          If new item is a Power Tool, then include accessorites:
+          If new item is a Power Tool, then include Accessories:
           <button class= "add_field_button" name="addacc">Add Accessories</button>
         </div>
         <p><button type="submit" value="Add" name="addtool">Add Tool</button></p>
@@ -110,10 +110,14 @@
 
             var x = 1; //initlal text box count
             $(add_button).click(function(e){ //on add input button click
-                e.preventDefault();
-                if(x < max_fields){ //max input box allowed
-                    $(wrapper).append('<div><input type="text" name="acc' + x + '" method ="post"><a href="#" class="remove_field">x</a></div>'); //add input box
-                    x++; //text box increment
+              if ($(".tooltype").val() == 'power') {
+                  e.preventDefault();
+                  if(x < max_fields){ //max input box allowed
+                      $(wrapper).append('<div><input type="text" name="acc' + x + '" method ="post"><a href="#" class="remove_field">x</a></div>'); //add input box
+                      x++; //text box increment
+                  }
+                } else {
+                  alert("You can only add Accessories for Power Tools")
                 }
             });
             $(wrapper).on("click",".remove_field", function(e){ //user click on remove text

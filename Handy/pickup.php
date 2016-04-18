@@ -17,11 +17,18 @@
 				if($_POST['ResNum']){
 					$Res = $_POST["ResNum"];
 					//read from db
-					$sql = "select resv_number from reservation where resv_number = '$Res'";
+					$sql = "select * from reservation where resv_number = '$Res'";
 					$result = $conn->query($sql) or die('Error querying database.');
 					if($result->num_rows > 0){
-						$_SESSION['res_num'] = $Res;
-						echo "<script> window.location.assign('PickUpMenu.php');</script>";
+						$row = $result->fetch_assoc();
+						if ($row['pickup_clerk_id']) {
+							echo '<script language="javascript">';
+							echo "alert(\"Reservation $Res has been picked up already\")";
+							echo '</script>';
+						} else {
+							$_SESSION['res_num'] = $Res;
+							echo "<script> window.location.assign('PickUpMenu.php');</script>";
+						}
 					}
 					else{
 						echo '<script language="javascript">';
@@ -50,12 +57,10 @@
 			<input type = "text" name = "ResNum"><br>
 			<p><button type = "submit" name = "pickup">Submit</button></p>
 			<div>
-            			<p><button type="submit" value="Submit" name="service">Submit New Service Order</button></p>
-
-            			<hr>
-            			<button class = "btn btn-lg btn-primary btn-block" type = "submit" name = "back">Back</button>
-            			<button class = "btn btn-lg btn-primary btn-block" type = "submit" name = "logout">Log Out</button>
-         		</div>
+    			<hr>
+    			<button class = "btn btn-lg btn-primary btn-block" type = "submit" name = "back">Main Menu</button>
+    			<button class = "btn btn-lg btn-primary btn-block" type = "submit" name = "logout">Log Out</button>
+ 		</div>
 		</form>
 	</body>
 </html>
