@@ -38,7 +38,7 @@
 			//find out customer email
 			$sql_customer = "select * from reservation r join customer c on c.email = r.customer_email where resv_number = '$contract_num'";
 			$result_reservation = $conn->query($sql_customer);
-			$row_reservation = $result_reservation->fetch_assoc()；
+			$row_reservation = $result_reservation->fetch_assoc();
 			$customer_email = $row_reservation['customer_email'];
 
 			//find out customer name according to email
@@ -64,8 +64,8 @@
 			}
 
 			//deposit and cost
-			echo "<p><label>Deposit Held:</label> $".$row_reservation['total_deposit']."</p>"
-			echo "<p><label>Estimated Rental:</label> ".$row_reservation['total_price']."</p>";
+			echo "<p><label>Deposit Held:</label> $".$row_reservation['total_deposit']."</p>";
+			echo "<p><label>Estimated Rental:</label> $".$row_reservation['total_price']."</p>";
 			//signature
 			echo "<p><label>Signature:</label> ___________________________________________</p>";
 			if (isset($_POST['back'])) {
@@ -77,7 +77,6 @@
             }
 
 		?>
-			}
 		<form action = '' method = "post">
 			<div>
             			<button class = "btn btn-lg btn-primary btn-block" type = "submit" name = "back">Back to Main</button>
@@ -86,4 +85,4 @@
 		</form>
 	
 	</body>
-</html>
+</html
