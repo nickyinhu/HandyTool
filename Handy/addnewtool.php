@@ -2,6 +2,7 @@
 
    <head>
       <title>Handyman Tool</title>
+      <script src="https://code.jquery.com/jquery-1.10.2.js"></script>
       <style type="text/css">
         label{
           display:inline-block;
@@ -24,10 +25,14 @@
             global $conn;
 
             if (isset($_POST['addtool'])) {
-                if (empty($_POST['abbr']) || empty($_POST['purchaseprice']) || empty($_POST['rentalprice']) || empty($_POST['deposit']) || empty($_POST['full'])) {
+              if (empty($_POST['abbr']) || empty($_POST['purchaseprice']) || empty($_POST['rentalprice']) || empty($_POST['deposit']) || empty($_POST['full'])) {
                     echo '<h4>&nbsp&nbsp<span style="color:#FF0000;text-align:center;">All fileds are required!</span></h4>';
                 } elseif (!is_numeric($_POST['purchaseprice']) || !is_numeric($_POST['rentalprice']) || !is_numeric($_POST['deposit'])) {
                     echo '<h4>&nbsp&nbsp<span style="color:#FF0000;text-align:center;">Purchase Price, Rental Price and Deposit must be numeric value!</span></h4>';
+                } elseif ($_POST['tooltype'] != 'power' && $_POST['acc1']) {
+                  echo '<script language="javascript">';
+                  echo 'alert("You Can only add accessories for power tools")';
+                  echo '</script>';
                 } else {
                     $abbr          = $_POST['abbr'];
                     $purchaseprice = $_POST['purchaseprice'];
@@ -41,30 +46,23 @@
                     // Print response from MySQL
                     if (mysqli_query($conn, $sql)) {
                         $last_id = $conn->insert_id;
+                        if ($tool_type == 'power') {
+                          $acc_array = array();
+                          for ($x = 0; $x <= 10; $x++) {
+                            if (isset($_POST["acc$x"]) && $_POST["acc$x"] && !array_key_exists($_POST["acc$x"], $acc_array)) {
+                              $acc = $_POST["acc$x"];
+                              $acc_array[$acc] = 1;
+                              $acc_sql = "INSERT INTO accessories (tool_id, accessory) VALUES ('$last_id', '$acc')";
+                              mysqli_query($conn, $acc_sql) or die("Cannot Insert Accessories into Database");
+                            }
+                          }
+                        }
                         echo '<script language="javascript">';
                         echo 'alert("Tool ' . $abbr . ' was added successfully! Tool ID: ' . $last_id . '")';
                         echo '</script>';
-                        $_SESSION['last_insert_tool_id']   = $last_id;
-                        $_SESSION['last_insert_tool_type'] = $tool_type;
-                        $_SESSION['last_insert_tool_abbr'] = $abbr;
                     } else {
                         die("Error: " . mysqli_error($con));
                     }
-                }
-            }
-
-            if (isset($_POST['addacc'])) {
-                if (!isset($_SESSION['last_insert_tool_id']) || !isset($_SESSION['last_insert_tool_type'])) {
-                    echo '<script language="javascript">';
-                    echo 'alert("You have to add the tool first before adding accessories")';
-                    echo '</script>';
-                } elseif ($_SESSION['last_insert_tool_type'] != 'power') {
-                    $last_id = $_SESSION['last_insert_tool_id'];
-                    echo '<script language="javascript">';
-                    echo 'alert("You can only add accessories for power tool")';
-                    echo '</script>';
-                } else {
-                    echo "<script> window.location.assign('addaccessories.php'); </script>";
                 }
             }
             if (isset($_POST['logout'])) {
@@ -93,18 +91,35 @@
               <option value="hand">Hand</option>
                <option value="power">Power</option>
            </select>
-        <div>
-        If new item is a Power Tool, then include accessorites: <button type="submit" value="Add" name="addacc">Add Accessories</button>
+        <div class = "input_fields_wrap">
+          If new item is a Power Tool, then include accessorites:
+          <button class= "add_field_button" name="addacc">Add Accessories</button>
         </div>
-        <p><div>
-           <button type="submit" value = "Submit" name="addtool">Submit New Tool</button>
-        </div></p>
+        <p><button type="submit" value="Add" name="addtool">Add Tool</button></p>
         <p>
         <hr>
             <button class = "btn btn-lg btn-primary btn-block" type = "submit" name = "back">Main Menu</button>
             <button class = "btn btn-lg btn-primary btn-block" type = "submit" name = "logout">Log Out</button>
         </p>
       </form>
+      <script>
+        $(document).ready(function() {
+            var max_fields      = 10; //maximum input boxes allowed
+            var wrapper         = $(".input_fields_wrap"); //Fields wrapper
+            var add_button      = $(".add_field_button"); //Add button ID
+
+            var x = 1; //initlal text box count
+            $(add_button).click(function(e){ //on add input button click
+                e.preventDefault();
+                if(x < max_fields){ //max input box allowed
+                    $(wrapper).append('<div><input type="text" name="acc' + x + '" method ="post"><a href="#" class="remove_field">x</a></div>'); //add input box
+                    x++; //text box increment
+                }
+            });
+            $(wrapper).on("click",".remove_field", function(e){ //user click on remove text
+                e.preventDefault(); $(this).parent('div').remove(); x--;
+            })
+          });
+    </script>
    </body>
 </html>
-
