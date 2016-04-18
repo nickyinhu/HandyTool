@@ -66,6 +66,9 @@
                 echo "<script> window.location.assign('index.php'); </script>";
             }
             if (isset($_POST['back'])) {
+                unset($_SESSION['tooltype']);
+                unset($_SESSION['startdate']);
+                unset($_SESSION['enddate']);
                 echo "<script> window.location.assign('customer.php'); </script>";
             }
         ?>
