@@ -18,16 +18,16 @@
 			   $result = $conn->query($sql) or die('Error querying database.');
 			   if ($result->num_rows > 0 ){
 				   echo '<p><table border="1">';
-                echo '<tr><th>Tool ID</th><th>Abbr. Description</th><th>Full Description</th><th>Deposit</th><th>Purchase Price($)</th><th>Rental Price($)</th><th>Tool Type</th><th>Sold Date</th></tr>';
+                
                 while ($row = $result->fetch_assoc()) {
-                    echo '<tr><td align="center">',     $row['tool_id'],
-                         '</td><td align="left">&nbsp', $row['abbr_description'],
-						 '</td><td align="left">&nbsp', $row['full_description'],
-                         '</td><td align="center">',    $row['deposit'],
-                         '</td><td align="center">',    $row['purchase_price'],
-						 '</td><td align="center">', $row['rental_price'],
-						 '</td><td align="center">', $row['tool_type'],
-						 '</td><td align="center">', $row['sold_date'],
+                    echo '<tr><th>Tool ID</th><td align="center">',     $row['tool_id'], 
+                         '</td><tr><th>Abbr. Description</th><td align="left">&nbsp', $row['abbr_description'],
+						 '</td><tr><th>Full Description</th><td align="left">&nbsp', $row['full_description'],
+                         '</td><tr><th>Deposit</th><td align="center">',    $row['deposit'],
+                         '</td><tr><th>Purchase Price($)</th><td align="center">',    $row['purchase_price'],
+						 '</td><tr><th>Rental Price($)</th><td align="center">', $row['rental_price'],
+						 '</td><tr><th>Tool Type</th><td align="center">', $row['tool_type'],
+						 '</td><tr><th>Sold Date</th><td align="center">', $row['sold_date'],
 						 '</td></tr>';
                 }
                 echo '</table></p>';
