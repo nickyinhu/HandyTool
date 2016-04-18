@@ -39,7 +39,7 @@
                 $abbr = $row['abbr'];
                 $name = $row['tool_id'] . '. ' . $row['abbr'] . ' $' . $row['price'];
                 $tool_id = $row['tool_id'];
-                echo "<option value=\"$tool_id\" abbr=\"$abbr\">$name</option>";
+                echo "<option value=\"$tool_id\" abbr=\"" . $abbr . "\">" . $name . "</option>";
             }
         }
         echo '</select></p>';

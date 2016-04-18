@@ -48,7 +48,7 @@
                     $row_tool = $result_tool->fetch_assoc();
                     $abbr = $row_tool['abbr_description'];
                     //echo tool id and abbr
-                    echo "<p><h4>$num: Tool [$tool_id] $abbr</h4></p>";
+                    echo "<p><h4>$num: Tool [$tool_id] " . $abbr . "</h4></p>";
                     $num = $num + 1;
                 }
             }
