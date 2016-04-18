@@ -87,7 +87,7 @@
         return "
                 SELECT abbr_description as abbr,
                     SUM(tools.rental_price * (DATEDIFF('$enddate', '$startdate') + 1)) AS rental, 
-                    SUM(tools.deposit * (DATEDIFF('$enddate', '$startdate') + 1)) AS deposit
+                    SUM(tools.deposit) AS deposit
                 FROM tools
                 WHERE tool_id in ($id_list)";
     }
