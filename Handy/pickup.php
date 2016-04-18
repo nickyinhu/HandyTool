@@ -38,6 +38,10 @@
              			unset($_SESSION['res_num']);
              			echo "<script> window.location.assign('clerk.php'); </script>";
          		}
+         		if (isset($_POST['logout'])) {
+                		session_destroy();
+                		echo "<script> window.location.assign('index.php'); </script>";
+            		}
 			
 		?>
 
@@ -50,7 +54,7 @@
 
             			<hr>
             			<button class = "btn btn-lg btn-primary btn-block" type = "submit" name = "back">Back</button>
-            		
+            			<button class = "btn btn-lg btn-primary btn-block" type = "submit" name = "logout">Log Out</button>
          		</div>
 		</form>
 	</body>
