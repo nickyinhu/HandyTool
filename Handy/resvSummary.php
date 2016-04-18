@@ -60,7 +60,7 @@
                 <p><h4><?php 
                 ksort($tool_list);
                 foreach ($tool_list as $id => $abbr) {
-                    echo "<p><label>#$id</label> $abbr</p>";
+                    echo "<p><label>#$id</label> " . $abbr ."</p>";
                 }?></h4></p>
                 <hr>
                 <p>Start Date <?php echo $start ?></p>
