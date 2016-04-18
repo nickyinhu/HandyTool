@@ -18,11 +18,11 @@
 
          if (isset($_POST['sell'])) {
 
-            $toolid = $_POST['toolid']
+            $toolid = $_POST['toolid'];
          
-            $sql = "UPDATE tools SET purchase_price = purchase_price * 0.5, sold_date = getdate() WHERE tool_id = $toolid";
+            $sql = "UPDATE tools SET purchase_price = purchase_price * 0.5, sold_date = CURDATE() WHERE tool_id = '$toolid'";
             
-            $query = "SELECT tool_id, purchase_price FROM tools WHERE tool_id = $toolid";
+            $query = "SELECT tool_id, purchase_price FROM tools WHERE tool_id = '$toolid'";
             $result = mysql_query($query);
 
             echo "<table>";
@@ -42,6 +42,14 @@
          <button type="submit" value="Submit" name＝"sell">Sell</button>
       </div>
       </form>
+      
+      </form>
+      <div>
+            <label></label><button type="submit" onClick="location.href='clerk.php'">Main Menu</button>
+            <label></label><button type="submit" onClick="location.href='index.php'">Exit</button>
+            </div>
+            </div>
+         </p>
 
    </body>
 </html>

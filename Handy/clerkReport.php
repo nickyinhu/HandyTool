@@ -25,7 +25,7 @@
             if ($clerk_report_result->num_rows > 0) {
                 echo '<p><table border="1">';
                 echo '<tr><th>Clerk ID</th><th>First Name</th><th>Last Name</th><th>Pickups</th><th>Dropoffs</th>';
-                while ($row = $customer_report_result->fetch_assoc()) {
+                while ($row = $clerk_report_result->fetch_assoc()) {
                     echo '<tr><td align="left">&nbsp',  $row['clerk_id'],
                          '</td><td align="left">&nbsp', $row['first_name'],
                          '</td><td align="left">&nbsp', $row['last_name'],
