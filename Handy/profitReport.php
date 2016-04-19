@@ -27,7 +27,7 @@
             if ($tool_report_result->num_rows > 0) {
                 echo '<p><table border="1">';
                 echo '<tr><th>Tool ID</th><th>Description</th><th>Type</th><th>Rental ($)</th>';
-                echo '<th>Cost ($)</th><th>Profit ($)</th><th>Rental Days</th><th>Service Days</th></tr>';
+                echo '<th>Cost ($)</th><th>Rental Days</th><th>Service Days</th><th>Profit ($)</th></tr>';
                 while ($row = $tool_report_result->fetch_assoc()) {
                     switch ($row['tool_type']) {
                         case 'hand':
@@ -45,9 +45,10 @@
                          '</td><td align="left">&nbsp', $type,
                          '</td><td align="center">',    $row['rental_profit'],
                          '</td><td align="center">',    $row['cost'],
-                         '</td><td align="center">',    $row['total_profit'],
                          '</td><td align="center">',    $row['rental_days'],
-                         '</td><td align="center">',    $row['service_days'],'</td></tr>';
+                         '</td><td align="center">',    $row['service_days'],
+						 '</td><td align="center">',    $row['total_profit'],
+						 '</td></tr>';
                 }
                 echo '</table></p>';
             }

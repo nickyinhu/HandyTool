@@ -175,6 +175,8 @@
                 GROUP BY t.tool_id
             ) as calc
             GROUP BY calc.tool_id
+			ORDER BY total_profit DESC
+
         ";
     }
 
