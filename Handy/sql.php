@@ -131,7 +131,7 @@
             LEFT JOIN tools as t  on rc.tool_id = t.tool_id
             LEFT JOIN reservation r on r.resv_number = rc.resv_number
             LEFT JOIN clerk as pc on pc.clerk_id = r.pickup_clerk_id
-            LEFT JOIN clerk as dc on pc.clerk_id = r.dropoff_clerk_id
+            LEFT JOIN clerk as dc on dc.clerk_id = r.dropoff_clerk_id
             WHERE r.customer_email = '$email'
             ORDER BY r.resv_number DESC, t.tool_id
         ";
