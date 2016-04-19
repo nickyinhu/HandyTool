@@ -63,6 +63,7 @@
             </select>
             </p>
         </div>
+        <div id = "result"></div>
 
         <div>
             <form class = "form-signin" role = "form" action = "" method = "post">
@@ -99,6 +100,7 @@
                             alert("Tool part # " + id + " " + abbr + ": has been added to your list");
                         }
                     });
+                    $("div#result").load("tool_result.php");
                 });
 
                 $("button#remove").click(function(){
@@ -110,6 +112,7 @@
                             alert("The last tool has been removed from your list");
                         }
                     });
+                    $("div#result").load("tool_result.php");
                 });
             });
         </script>
