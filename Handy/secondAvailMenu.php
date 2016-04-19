@@ -19,10 +19,10 @@
     }
     elseif (!validateDate($enddate)) {
         echo '&nbsp&nbsp<span style="color:#FF0000;text-align:center;">Please type a valid End Date!</span>';
-    }    
-    // elseif (!laterthantoday($startdate)) {
-    //     echo '&nbsp&nbsp<span style="color:#FF0000;text-align:center;">Start Date must be today or in the future!</span>';
-    // }
+    }
+    elseif (!laterthantoday($startdate)) {
+        echo '&nbsp&nbsp<span style="color:#FF0000;text-align:center;">Start Date must be today or in the future!</span>';
+    }
     elseif (checkStartEnd($startdate,$enddate)) {
         echo '&nbsp&nbsp<span style="color:#FF0000;text-align:center;">Start Date cannot be greater than End Date!</span>';
     } else {

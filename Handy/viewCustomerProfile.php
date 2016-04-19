@@ -16,7 +16,7 @@
 
 
     <body>
-        <h2>Customer Prifile</h2>
+        <h2>Customer Profile</h2>
    
         <?php
            
