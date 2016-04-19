@@ -85,9 +85,9 @@
                     $contract_sql = "UPDATE reservation SET pickup_clerk_id = '$clerk_id',
                         credit_card = '$credit_card', exp_date = '$expire_date' WHERE resv_number = '$Res'";
                     $conn->query($contract_sql) or die("Error update database");
-                    unset($_SESSION['res_num']);
                     $_SESSION['contract_num'] = $Res;
-                    $_SESSION['credit_card_number'] = $credit_card; 
+                    $_SESSION['credit_card_number'] = $credit_card;
+                    unset($_SESSION['res_num']);
                     echo "<script> window.location.assign('RentalContract.php');</script>";
                 } else {
                     echo '<script language="javascript">';
@@ -96,6 +96,7 @@
                 }
             }
             if (isset($_POST['back'])) {
+                unset($_SESSION['res_num']);
                 echo "<script> window.location.assign('clerk.php'); </script>";
             }
             if (isset($_POST['logout'])) {

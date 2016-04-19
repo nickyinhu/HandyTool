@@ -14,18 +14,11 @@
 				die("You are not login yet!");
 				header("refresh: 3; url = index.php");
 			}
+			$condition = 0;
 			$sql = "select * from reservation r join customer c on r.customer_email = c.email where pickup_clerk_id is null";
 			$result = $conn->query($sql) or die("Error query database");
 			if ($result->num_rows > 0) {
-				echo '<p>Please select a reservation to pickup</p>';
-				echo '<p><select id="one" name="resv" method="post">';
-                echo '<option value="">Please Select Reservation</option>';
-				while ($row = $result->fetch_assoc()) {
-					$resv_num = $row['resv_number'];
-					$name = $row['first_name'] . ' ' . $row['last_name'];
-                	echo "<option value=\"$resv_num\">Resv # $resv_num for $name</option>";
-				}
-				echo '</select></p>';
+				$condition = 1;
 			} else {
 				echo '<script language="javascript">';
 				echo 'alert("No Available Reservation for Pickup")';
@@ -37,9 +30,8 @@
 					echo 'alert("Please Select a Reservation for Pickup")';
 					echo '</script>';
 				} else {
-					$Res = $_POST['resv'];
-					echo $Res;
-					// echo "<script> window.location.assign('PickUpMenu.php');</script>";
+					$_SESSION['res_num'] = $_POST['resv'];
+					echo "<script> window.location.assign('PickUpMenu.php');</script>";
 				}
 			}
 			if (isset($_POST['back'])) {
@@ -54,6 +46,16 @@
 		?>
 
 		<form action = '' method = "post">
+				<?php if ($condition) {
+					echo '<p><select id="one" name="resv">';
+					echo '<option value="">Please Select Reservation</option>';
+					while ($row = $result->fetch_assoc()) {
+						$resv_num = $row['resv_number'];
+						$name = $row['first_name'] . ' ' . $row['last_name'];
+						echo "<option value=\"$resv_num\">Resv # $resv_num for $name</option>";
+					}
+					echo '</select></p>';
+				} ?>
 			<p><button type = "submit" name = "pickup">Submit</button></p>
 			<div>
 				<hr>

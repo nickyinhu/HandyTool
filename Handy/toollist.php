@@ -6,6 +6,7 @@
         }
         $tool_list = $_SESSION['tool_list'];
         $tool_list[$_GET['tool_id']] = $_GET['abbr'];
+        var_dump($tool_list);
         $_SESSION['tool_list'] = $tool_list;
     }
     if (isset($_GET['remove'])) {

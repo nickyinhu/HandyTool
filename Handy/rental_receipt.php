@@ -69,6 +69,7 @@
             echo "             --------------------";
             echo "<p><label>Total:</label>        $".$total."</p>";
             if (isset($_POST['back'])) {
+                unset($_SESSION['res_num']);
                 echo "<script> window.location.assign('clerk.php'); </script>";
             }
             if (isset($_POST['logout'])){
