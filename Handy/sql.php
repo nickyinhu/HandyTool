@@ -207,7 +207,8 @@
                 UPPER(resv_count.first_name) as first_name,
                 UPPER(resv_count.last_name) as last_name,
                 sum(resv_count.pick_up_count) as pickup,
-                sum(resv_count.drop_off_count) as dropoff
+                sum(resv_count.drop_off_count) as dropoff,
+				(sum(resv_count.pick_up_count)+sum(resv_count.drop_off_count)) as total
             FROM
             (
                 SELECT c.clerk_id, c.first_name, c.last_name, count(pickup_clerk_id) as pick_up_count,
@@ -225,6 +226,7 @@
                 GROUP BY c.clerk_id
             ) as resv_count
             GROUP BY resv_count.clerk_id
+			ORDER BY total DESC
         ";
     }
 ?>

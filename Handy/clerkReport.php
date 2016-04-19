@@ -26,13 +26,16 @@
             $clerk_report_result = $conn->query($clerk_report_sql) or die("Error query database");
             if ($clerk_report_result->num_rows > 0) {
                 echo '<p><table border="1">';
-                echo '<tr><th>Clerk ID</th><th>First Name</th><th>Last Name</th><th>Pickups</th><th>Dropoffs</th>';
+                echo '<tr><th>Clerk ID</th><th>First Name</th><th>Last Name</th><th>Pickups</th><th>Dropoffs</th><th>Total</th>';
                 while ($row = $clerk_report_result->fetch_assoc()) {
                     echo '<tr><td align="left">&nbsp',  $row['clerk_id'],
                          '</td><td align="left">&nbsp', $row['first_name'],
                          '</td><td align="left">&nbsp', $row['last_name'],
                          '</td><td align="center">',    $row['pickup'],
-                         '</td><td align="center">',    $row['dropoff'],'</td></tr>';
+                         '</td><td align="center">',    $row['dropoff'],
+						 '</td><td align="center">',    $row['total'],
+						 '</td></tr>';
+						 
                 }
                 echo '</table></p>';
             }
