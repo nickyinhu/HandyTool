@@ -82,14 +82,14 @@
                  $customer_resv_result = $conn->query($customer_resv_sql) or die('Error querying database.');
                 if ($customer_resv_result->num_rows > 0 ) {
                     echo '<p><table border="1">';
-                    echo '<tr><th>Resv #</th><th>Tools</th><th>Start</th><th>End</th><th>Rental Price($)</th><th>Deposit($)</th><th>Pick-up Clerk</th><th>Drop-off Clerk</th></tr>';
+                    echo '<tr><th>Resv #</th><th>Tools</th><th>Start</th><th>End</th><th>Rental Price</th><th>Deposit</th><th>Pick-up Clerk</th><th>Drop-off Clerk</th></tr>';
                     while ($row = $customer_resv_result->fetch_assoc()) {
                         echo '<tr><td align="center">', $row['resv_number'],
                          '</td><td align="left">&nbsp', $row['abbr'],
                          '</td><td align="center">',    $row['start'],
                          '</td><td align="center">',    $row['end'],
-                         '</td><td align="center">',    $row['rental_price'],
-                         '</td><td align="center">',    $row['deposit'],
+                         '</td><td align="center">$',    $row['rental_price'],
+                         '</td><td align="center">$',    $row['deposit'],
                          '</td><td align="left">&nbsp',    $row['pickup_clerk'],
                          '</td><td align="left">&nbsp',    $row['dropoff_clerk'],
                          '</td></tr>';
