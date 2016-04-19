@@ -58,8 +58,8 @@
 
       <form action = '' method = "post">
       <label>Clerk ID: </label><input type="text" name="clerk_id"><br>
-      <label>Password: </label><input type="text" type = "password" name="password"><br>
-      <label>Confirm Password: </label><input type="text" type = "password" name="confirm_password"><br>
+      <label>Password: </label><input type = "password" name="password"><br>
+      <label>Confirm Password: </label><input type = "password" name="confirm_password"><br>
       <label>First Name: </label><input type="text" name="first_name"><br>
       <label>Last Name: </label><input type="text" name="last_name"><br>
       <div>
