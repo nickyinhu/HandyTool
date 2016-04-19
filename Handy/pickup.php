@@ -15,7 +15,7 @@
 				header("refresh: 3; url = index.php");
 			}
 			$condition = 0;
-			$sql = "select * from reservation r join customer c on r.customer_email = c.email where pickup_clerk_id is null";
+			$sql = "select * from reservation r join customer c on r.customer_email = c.email where pickup_clerk_id is null and start_date = curdate()";
 			$result = $conn->query($sql) or die("Error query database");
 			if ($result->num_rows > 0) {
 				$condition = 1;

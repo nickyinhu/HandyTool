@@ -40,6 +40,9 @@
          <div>
             <label><button type="submit" onClick="location.href='makereservation.php'">Make Reservation</button></label>
          </div>
+         <div>
+            <label><button type="submit" onClick="location.href='cancelReservation.php'">Cancel Reservation</button></label>
+         </div>
          <form class = "form-signin" role = "form" action = "" method = "post">
          <div><p>
             <label><button type="submit" name="logout">Log Out</button></label>
