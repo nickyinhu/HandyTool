@@ -20,7 +20,7 @@
        
          include('dbconn.php');
          global $conn;
-		 date_default_timezone_set('EST');
+     date_default_timezone_set('EST');
  
         if (isset($_POST['create_profile'])) {
             if (!($_POST['email']) || empty($_POST['password']) ||empty($_POST['confirm_password']) ||empty($_POST['first_name'])||empty($_POST['last_name']) ||empty($_POST['home_phone']) ||empty($_POST['work_phone']) ||empty($_POST['address'])){
@@ -30,20 +30,24 @@
             } else {
                $email   = $_POST['email'];
                $password = $_POST['password'];
-			   $confirm_password = $_POST['confirm_password'];
+               $confirm_password = $_POST['confirm_password'];
                $first_name = $_POST['first_name'];
                $last_name = $_POST['last_name'];
-			   $home_phone = $_POST['home_phone'];
-			   $work_phone = $_POST['work_phone'];
-			   $address = $_POST['address'];
-			   $today = date("Y-m-d");
-			   
-               if ($password!=$confirm_password) {
+               $home_phone = $_POST['home_phone'];
+               $work_phone = $_POST['work_phone'];
+               $address = $_POST['address'];
+               $today = date("Y-m-d");
+
+               $result = $conn->query("SELECT email, first_name, password from customer where email = '$email'");
+               if ($result->num_rows > 0) {
+                 echo '<script language="javascript">';
+                 echo 'alert("Login ' . $email . ' has been taken already")';
+                 echo '</script>';
+               } elseif ($password!=$confirm_password) {
                        echo '<script language="javascript">';
                        echo 'alert("Password does not match")';
                        echo '</script>';
                } else {
-                  
                      $sql = "INSERT INTO customer( email, password, first_name, last_name, home_phone, work_phone, address,create_date) 
                          VALUES ('$email','$password', '$first_name','$last_name','$home_phone','$work_phone', '$address','$today')";
                      if ( mysqli_query($conn, $sql) ) {
@@ -52,7 +56,7 @@
                        echo '</script>';
                        $_SESSION['login_user']= $email;
                         echo "<script> window.location.assign('customer.php'); </script>";
-						
+            
                      } else {
                         die("Error: " . mysqli_error($conn));
                      }

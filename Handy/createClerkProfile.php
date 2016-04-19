@@ -32,7 +32,12 @@
 			         $confirm_password = $_POST['confirm_password'];
                $first_name = $_POST['first_name'];
                $last_name = $_POST['last_name'];
-               if ($password!=$confirm_password) {
+               $result = $conn->query("SELECT clerk_id, first_name, password from clerk where clerk_id = '$clerk_id'");
+               if ($result->num_rows > 0) {
+                 echo '<script language="javascript">';
+                 echo 'alert("Clerk ID ' . $clerk_id . ' has been taken already")';
+                 echo '</script>';
+               } elseif ($password!=$confirm_password) {
                        echo '<script language="javascript">';
                        echo 'alert("Password does not match")';
                        echo '</script>';
