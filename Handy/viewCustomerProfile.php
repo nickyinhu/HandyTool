@@ -1,3 +1,4 @@
+<?php session_start(); ?>
 <html lang = "en">
 
 
@@ -18,7 +19,7 @@
         <h2>Customer Prifile</h2>
    
         <?php
-            session_start();
+           
             include('dbconn.php');
             include('sql.php');
 

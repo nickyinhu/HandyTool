@@ -1,8 +1,9 @@
 <?php
+    session_start();
     include('dbconn.php');
     include('functions.php');
     global $conn;
-    session_start();
+   
 
     $tooltype = $_GET["tooltype"];
     $startdate = $_GET["startdate"];

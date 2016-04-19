@@ -1,3 +1,4 @@
+<?php session_start(); ?>
 <html lang = "en">
 
     <head>
@@ -9,7 +10,7 @@
     <body>
         <h2>Make Reservation</h2>
         <?php
-            session_start();
+         
             include('dbconn.php');
             global $conn;
             if (empty($_SESSION['login_user'])) {

@@ -1,3 +1,4 @@
+<?php session_start(); ?>
 <html lang = "en">
 	<head>
 		<title>Handyman Tool</title>
@@ -16,7 +17,7 @@
 		<h4><i>HANDYMAN TOOLS RENTAL CONTRACT</i></h4>
 
 		<?php
-			session_start();
+			
 			include('dbconn.php');
 			global $conn;
 			if(empty($_SESSION['login_user']) || empty($_SESSION['contract_num'])){

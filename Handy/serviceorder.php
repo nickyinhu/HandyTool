@@ -1,3 +1,4 @@
+<?php session_start(); ?>
 <html lang = "en">
 
    <head>
@@ -15,7 +16,7 @@
    <body>
       <h2>Service Order Request</h2> 
       <?php
-         session_start();
+    
          if (empty($_SESSION['login_user'])) {
             die("You are not login yet!");
          }
