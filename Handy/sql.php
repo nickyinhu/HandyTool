@@ -1,4 +1,35 @@
 <?php
+    function get_sellability () {
+        return "
+        SELECT t.tool_id, t.abbr_description as abbr, t.rental_price as price, t.deposit
+        FROM tools as t
+        where t.sold_date is null
+        and not exists
+        (
+            SELECT t.tool_id
+            FROM reservation_contains as rc
+            inner join reservation as r on r.resv_number = rc.resv_number
+            where rc.tool_id = t.tool_id
+            and (
+                   (r.start_date <= date(curdate()) and r.end_date >= date(curdate()))
+                or (r.start_date <= date(curdate()) and r.end_date >= date(curdate()))
+                or (r.start_date >= date(curdate()) and r.start_date <= date(curdate()))
+            )
+        )
+        and not exists
+        (
+            SELECT t.tool_id
+            FROM service_request as sr
+            WHERE sr.tool_id = t.tool_id
+            and (
+                   (sr.start_date <= date(curdate()) and sr.end_date >= date(curdate()))
+                or (sr.start_date <= date(curdate()) and sr.end_date >= date(curdate()))
+                or (sr.start_date >= date(curdate()) and sr.start_date <= date(curdate()))
+            )
+        )
+        ";
+    }
+
     function get_availability ($tooltype, $startdate, $enddate) {
         if (!isset($tooltype) || !isset($startdate) || !isset($enddate)) {
             die("You need to provide tooltype, startdate, and enddate");

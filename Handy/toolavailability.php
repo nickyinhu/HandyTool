@@ -45,7 +45,7 @@
                          '</td><td align="left">&nbsp', $row['abbr'],
                          '</td><td align="center">',    $row['deposit'],
                          '</td><td align="center">',    $row['price'],'</td></tr>';
-                    $tool_ids[] = $row['tool_id'];
+                    $tool_ids[$row['tool_id']] = $row['abbr'];
                 }
                 echo '</table></p>';
                 $condition = 1;
@@ -81,8 +81,8 @@
                     <p>Part # 
                     <select name="tool_id" style="width: 120px;">
                         <option value="">Please select</option>
-                        <?php foreach ($tool_ids as $tool_id) {
-                            echo "<option value=\"$tool_id\">$tool_id</option>";
+                        <?php foreach ($tool_ids as $tool_id => $abbr) {
+                            echo "<option value=\"$tool_id\">#$tool_id. $abbr</option>";
                         } ?>
                     </select>
                     <button class = "btn btn-lg btn-primary btn-block" type = "submit" name = "submit">Submit</button>

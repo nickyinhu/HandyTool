@@ -20,17 +20,26 @@
 			   if ($result->num_rows > 0 ){
 				   echo '<p><table border="1">';
                 
-                while ($row = $result->fetch_assoc()) {
-                    echo '<tr><th>Tool ID</th><td align="center">',     $row['tool_id'], 
-                         '</td><tr><th>Abbr. Description</th><td align="left">&nbsp', $row['abbr_description'],
-						 '</td><tr><th>Full Description</th><td align="left">&nbsp', $row['full_description'],
-                         '</td><tr><th>Deposit</th><td align="center">',    $row['deposit'],
-                         '</td><tr><th>Purchase Price($)</th><td align="center">',    $row['purchase_price'],
-						 '</td><tr><th>Rental Price($)</th><td align="center">', $row['rental_price'],
-						 '</td><tr><th>Tool Type</th><td align="center">', $row['tool_type'],
-						 '</td><tr><th>Sold Date</th><td align="center">', $row['sold_date'],
-						 '</td></tr>';
+                $row = $result->fetch_assoc();
+
+                switch ($row['tool_type']) {
+                    case 'hand':
+                        $tooltype = 'Hand Tools';
+                        break;
+                    case 'construction':
+                        $tooltype = 'Construction Equipment';
+                        break;
+                    case 'power':
+                        $tooltype = 'Power Tools';
+                        break;
                 }
+                  echo '<tr><th>Tool Part #</th><td align="center">',     $row['tool_id'], 
+                  '</td><tr><th>Tool Type</th><td align="center">', $tooltype,
+                  '</td><tr><th>Abbr. Description</th><td align="left">&nbsp', $row['abbr_description'],
+                  '</td><tr><th>Full Description</th><td align="left">&nbsp', $row['full_description'],
+                  '</td><tr><th>Deposit</th><td align="center">$',    $row['deposit'],
+                  '</td><tr><th>Rental Per Day</th><td align="center">$', $row['rental_price'],
+                  '</td></tr>';
                 echo '</table></p>';
 			   }
             if (isset($_POST['logout'])) {

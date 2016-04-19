@@ -8,11 +8,10 @@
    <body>
       <h2>Enter User ID and Password</h2> 
       <?php
-	  
+      
         
          include('dbconn.php');
          global $conn;
-         $msg = '';
          if (isset($_POST['login']) && !empty($_POST['username']) && !empty($_POST['password'])) {
             $username = $_POST['username'];
             $password = $_POST['password'];
@@ -22,26 +21,33 @@
                $database = $_POST['accounttype'];
                $sql = '';
                if ($database == 'clerk') {
-                  $sql = "SELECT clerk_id, first_name from $database where clerk_id = '$username' and password = '$password'";
+                  $sql = "SELECT clerk_id, first_name, password from $database where clerk_id = '$username'";
                } else {
-                  $sql = "SELECT email, first_name from $database where email = '$username' and password = '$password'";
+                  $sql = "SELECT email, first_name, password from $database where email = '$username'";
                }
                $result = $conn->query($sql) or die('Error querying database.');
                if ($result->num_rows > 0 ) {
+                  $row = $result->fetch_assoc();
+                  if ($row['password'] == $password) {
                      $_SESSION['login_user']= $username;
-                  if ($database == 'clerk' ) {
-                     echo "<script> window.location.assign('clerk.php'); </script>";
+                     if ($database == 'clerk' ) {
+                        echo "<script> window.location.assign('clerk.php'); </script>";
+                     } else {
+                        echo "<script> window.location.assign('customer.php'); </script>";
+                     }
                   } else {
-                     echo "<script> window.location.assign('customer.php'); </script>";
+                     echo '<script language="javascript">';
+                     echo 'alert("Please check your password")';
+                     echo '</script>';
                   }
                }else {
-                  $msg = 'Wrong credentials! Redirecting to registration...';
+                  echo '<script language="javascript">';
+                  echo 'alert("Wrong credentials! Redirecting to registration")';
+                  echo '</script>';
                   if ($database == 'clerk' ) {
-                     
-					 echo "<script> window.location.assign('createClerkProfile.php')</script>";
+                    echo "<script> window.location.assign('createClerkProfile.php')</script>";
                   } else {
-                     
-					 echo "<script> window.location.assign('createCustomerProfile.php')</script>";
+                    echo "<script> window.location.assign('createCustomerProfile.php')</script>";
                   }
                }
             }
@@ -52,7 +58,6 @@
          <form class = "form-signin" role = "form" 
             action = "<?php echo htmlspecialchars($_SERVER['PHP_SELF']); 
             ?>" method = "post">
-            <h4 class = "form-signin-heading"><?php echo $msg; ?></h4>
             <p>
             <input type = "text" class = "form-control" 
                name = "username" placeholder = "User ID"
@@ -69,7 +74,7 @@
                <input type="radio" name="accounttype"
                value="clerk">Clerk
                <input type="radio" name="accounttype"
-               value="customer" >Customer
+               value="customer" checked="checked">Customer
          </form>
       </div>
    </body>

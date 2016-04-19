@@ -21,6 +21,8 @@
          if (empty($_SESSION['login_user'])) {
             die("You are not login yet!");
          }
+         $login_user = $_SESSION['login_user'];
+         echo "<h4>Welcome $login_user</h4>";
          if (isset($_POST['logout'])) {
              session_destroy();
              echo "<script> window.location.assign('index.php'); </script>";

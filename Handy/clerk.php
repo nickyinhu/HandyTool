@@ -15,10 +15,11 @@
    <body>
       <h2>Clerk</h2> 
       <?php
-        
          if (empty($_SESSION['login_user'])) {
             die("You are not login yet!");
          }
+         $login_user = $_SESSION['login_user'];
+         echo "<h4>Clerk On Duty $login_user</h4>";
       ?>
 
 
