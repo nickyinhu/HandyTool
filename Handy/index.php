@@ -52,6 +52,14 @@
                }
             }
          }
+         if (isset($_POST['reg'])) {
+           $database = $_POST['accounttype'];
+           if ($database == 'clerk') {
+                echo "<script> window.location.assign('createClerkProfile.php')</script>";
+           } else {
+                echo "<script> window.location.assign('createCustomerProfile.php')</script>";
+           }
+         }
       ?>
 
       <div class = "container">
@@ -69,6 +77,8 @@
             </p>
             <button class = "btn btn-lg btn-primary btn-block" type = "submit" 
                name = "login">Login</button>
+            <button class = "btn btn-lg btn-primary btn-block" type = "submit" 
+               name = "reg">Register</button>
             <br>
                Account Type
                <input type="radio" name="accounttype"

@@ -39,14 +39,19 @@
 			   $today = date("Y-m-d");
 			   
                if ($password!=$confirm_password) {
-                  echo '&nbsp&nbsp<span style="color:#FF0000;text-align:center;">Password does not match!</span>';
+                       echo '<script language="javascript">';
+                       echo 'alert("Password does not match")';
+                       echo '</script>';
                } else {
                   
                      $sql = "INSERT INTO customer( email, password, first_name, last_name, home_phone, work_phone, address,create_date) 
                          VALUES ('$email','$password', '$first_name','$last_name','$home_phone','$work_phone', '$address','$today')";
                      if ( mysqli_query($conn, $sql) ) {
-                        echo "Successfully created new clerk profile";
-						$_SESSION['login_user']= $email;
+                       echo '<script language="javascript">';
+                       echo 'alert("Registration Success for ' . $email . '")';
+                       echo '</script>';
+                       $_SESSION['login_user']= $email;
+                        echo "<script> window.location.assign('customer.php'); </script>";
 						
                      } else {
                         die("Error: " . mysqli_error($conn));
@@ -61,8 +66,8 @@
 
       <form action = '' method = "post">
       <label>Email (Login): </label><input type="text" name="email"><br>
-      <label>Password: </label><input type="text" name="password"><br>
-      <label>Confirm Password: </label><input type="text" name="confirm_password"><br>
+      <label>Password: </label><input type = "password" name="password"><br>
+      <label>Confirm Password: </label><input type = "password" name="confirm_password"><br>
       <label>First Name: </label><input type="text" name="first_name"><br>
       <label>Last Name: </label><input type="text" name="last_name"><br>
       <label>Home Phone: </label><input type="text" name="home_phone"><br>
