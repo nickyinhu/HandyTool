@@ -1,3 +1,4 @@
+<?php session_start(); ?>
 <html lang = "en">
 
    <head>
@@ -7,7 +8,7 @@
    <body>
       <h2>Sell Tools</h2>
       <?php
-         session_start();
+    
 		   include('dbconn.php');
          global $conn;
 

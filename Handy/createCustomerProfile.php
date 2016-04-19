@@ -1,3 +1,4 @@
+<?php session_start(); ?>
 <html lang = "en">
 
    <head>
@@ -9,7 +10,7 @@
       <h2>Create a Profile</h2> 
       <h3>Handyman Tools Rental requires a valid profile for every user before they can make reservaitions.</h3>
       <?php
-         session_start();
+       
          include('dbconn.php');
          global $conn;
 		 date_default_timezone_set('EST');

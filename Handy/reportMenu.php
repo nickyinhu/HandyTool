@@ -1,3 +1,4 @@
+<?php session_start(); ?>
 <html lang = "en">
 
     <head>
@@ -16,7 +17,7 @@
     <body>
         <h2>Monthly Report</h2>
         <?php
-            session_start();
+          
             include('dbconn.php');
             include('sql.php');
             global $conn;

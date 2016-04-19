@@ -1,3 +1,4 @@
+<?php session_start(); ?>
 <html lang = "en">
 
     <head>
@@ -7,7 +8,7 @@
     <body>
         <h2>Customer</h2>
         <?php
-            session_start();
+      
             include('dbconn.php');
             include('functions.php');
             global $conn;

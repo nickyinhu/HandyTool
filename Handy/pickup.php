@@ -1,3 +1,4 @@
+<?php session_start(); ?>
 <html lang = "en">
 	<head>
 		<title>Handyman Tool</title>
@@ -6,7 +7,7 @@
 	<body>
 		<h2>Pick Up Reservation</h2>
 		<?php
-			session_start();
+			
 			include('dbconn.php');
 			global $conn;
 			if(empty($_SESSION['login_user'])){
