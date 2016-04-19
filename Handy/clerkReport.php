@@ -13,6 +13,7 @@
             include('dbconn.php');
             include('sql.php');
             global $conn;
+			date_default_timezone_set('EST');
             if (empty($_SESSION['login_user'])) {
                 die("You are not login yet!");
                 header("refresh:3;url=index.php");

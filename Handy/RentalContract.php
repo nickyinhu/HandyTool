@@ -20,6 +20,7 @@
 			
 			include('dbconn.php');
 			global $conn;
+			date_default_timezone_set('UTC');
 			if(empty($_SESSION['login_user']) || empty($_SESSION['contract_num'])){
 				die("You are not login yet!");
 				header("refresh: 3; url = index.php");
