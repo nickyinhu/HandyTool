@@ -3,6 +3,13 @@
 
    <head>
       <title>Handyman Tool</title>
+      <style type="text/css">
+        label{
+          display:inline-block;
+          width:150px;
+          height: 30px;
+        }
+      </style>
       
    </head>
 
@@ -53,24 +60,21 @@
 
 
       <form action = '' method = "post">
-      Email Address (Login): <input type="text" name="email"><br>
-      Password: <input type="text" name="password"><br>
-      Confirm Password: <input type="text" name="confirm_password"><br>
-      First Name: <input type="text" name="first_name"><br>
-      Last Name: <input type="text" name="last_name"><br>
-      Home Phone: <input type="text" name="home_phone"><br>
-      Work Phone: <input type="text" name="work_phone"><br>
-      Address: <input type="text" name="address"><br>
+      <label>Email (Login): </label><input type="text" name="email"><br>
+      <label>Password: </label><input type="text" name="password"><br>
+      <label>Confirm Password: </label><input type="text" name="confirm_password"><br>
+      <label>First Name: </label><input type="text" name="first_name"><br>
+      <label>Last Name: </label><input type="text" name="last_name"><br>
+      <label>Home Phone: </label><input type="text" name="home_phone"><br>
+      <label>Work Phone: </label><input type="text" name="work_phone"><br>
+      <label>Address: </label><input type="text" name="address"><br>
       <div>
          <p><button type="submit" value="Submit" name="create_profile">Submit</button></p>
       </div>
       </form>
       <div>
-            <label></label><button type="submit" onClick="location.href='customer.php'">Main Menu</button>
-            <label></label><button type="submit" onClick="location.href='index.php'">Exit</button>
+         <button type="submit" onClick="location.href='index.php'">Exit</button>
             </div>
-            </div>
-         </p>
 
 
    </body>

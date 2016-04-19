@@ -3,6 +3,13 @@
 
    <head>
       <title>Handyman Tool</title>
+      <style type="text/css">
+        label{
+          display:inline-block;
+          width:150px;
+          height: 30px;
+        }
+      </style>
       
    </head>
 
@@ -28,7 +35,6 @@
                if ($password!=$confirm_password) {
                   echo '&nbsp&nbsp<span style="color:#FF0000;text-align:center;">Password does not match!</span>';
                } else {
-                  
                      $sql = "INSERT INTO clerk( clerk_id, password, first_name, last_name ) 
                          VALUES ('$clerk_id','$password', '$first_name','$last_name')";
                      if ( mysqli_query($conn, $sql) ) {
@@ -46,20 +52,18 @@
       ?>
 
       <form action = '' method = "post">
-      Clerk ID: <input type="text" name="clerk_id"><br>
-      Password: <input type="text" name="password"><br>
-      Confirm Password: <input type="text" name="confirm_password"><br>
-      First Name: <input type="text" name="first_name"><br>
-      Last Name: <input type="text" name="last_name"><br>
+      <label>Clerk ID: </label><input type="text" name="clerk_id"><br>
+      <label>Password: </label><input type="text" name="password"><br>
+      <label>Confirm Password: </label><input type="text" name="confirm_password"><br>
+      <label>First Name: </label><input type="text" name="first_name"><br>
+      <label>Last Name: </label><input type="text" name="last_name"><br>
       <div>
          <p><button type="submit" value="Submit" name="create_profile">Submit</button></p>
-         
       </div>
       </form>
       
          <div>
-            <label></label><button type="submit" onClick="location.href='clerk.php'">Main Menu</button>
-            <label></label><button type="submit" onClick="location.href='index.php'">Exit</button>
+            <button type="submit" onClick="location.href='index.php'">Exit</button>
             </div>
          </div>
          </p>
