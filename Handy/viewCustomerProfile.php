@@ -90,8 +90,8 @@
                          '</td><td align="center">',    $row['end'],
                          '</td><td align="center">',    $row['rental_price'],
                          '</td><td align="center">',    $row['deposit'],
-                         '</td><td align="left">',    $row['pickup_clerk'],
-                         '</td><td align="left">',    $row['dropoff_clerk'],
+                         '</td><td align="left">&nbsp',    $row['pickup_clerk'],
+                         '</td><td align="left">&nbsp',    $row['dropoff_clerk'],
                          '</td></tr>';
                     }
                     echo '</table></p>';
